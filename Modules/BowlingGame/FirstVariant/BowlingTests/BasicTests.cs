@@ -1,7 +1,6 @@
-using FirstVariant;
 using NUnit.Framework;
 
-namespace BowlingTests;
+namespace BowlingGame.FirstVariant;
 
 [TestFixture]
 public class BasicTests
@@ -9,7 +8,7 @@ public class BasicTests
     [Test]
     public void GameScoreEqualsZeroInNewGame()
     {
-        Game game = new Game();
+        BowlingGame game = new BowlingGame();
 
         Assert.AreEqual(0, game.score);
     }
@@ -17,7 +16,7 @@ public class BasicTests
     [Test]
     public void GameScoreEqualsToKnockedPinsAfterOneRoll()
     {
-        Game game = new Game();
+        BowlingGame game = new BowlingGame();
 
         game.Roll(3);
 
@@ -27,7 +26,7 @@ public class BasicTests
     [Test]
     public void GameScoreEqualsToSumOfKnockedPinsAfterSeveralRolls()
     {
-        Game game = new Game();
+        BowlingGame game = new BowlingGame();
         game.Roll(2);
         game.Roll(4);
         game.Roll(5);
@@ -38,7 +37,7 @@ public class BasicTests
     [Test]
     public void DoNotCountPinsAfterTenthFrame()
     {
-        Game game = new Game();
+        BowlingGame game = new BowlingGame();
 
         for (int i = 0; i < 22; i++)
             game.Roll(1);
@@ -49,7 +48,7 @@ public class BasicTests
     [Test]
     public void CountSpareRollAfterTenthFrame()
     {
-        Game game = new Game();
+        BowlingGame game = new BowlingGame();
 
         for (int i = 0; i < 9; i++)
         {
@@ -67,7 +66,7 @@ public class BasicTests
     [Test]
     public void CountStrikeRollAfterTenthFrame()
     {
-        Game game = new Game();
+        BowlingGame game = new BowlingGame();
 
         for (int i = 0; i < 9; i++)
         {
@@ -85,7 +84,7 @@ public class BasicTests
     [Test]
     public void ThreeStrikesAtTenthFrame()
     {
-        Game game = new Game();
+        BowlingGame game = new BowlingGame();
 
         for (int i = 0; i < 9; i++)
         {
@@ -103,7 +102,7 @@ public class BasicTests
     [Test]
     public void ThreeStrikesAtTenthFrameEndsGame()
     {
-        Game game = new Game();
+        BowlingGame game = new BowlingGame();
 
         for (int i = 0; i < 9; i++)
         {

@@ -1,7 +1,6 @@
 using NUnit.Framework;
-using FirstVariant;
 
-namespace BowlingTests;
+namespace BowlingGame.FirstVariant;
 
 [TestFixture]
 public class BowlingTests
@@ -9,7 +8,7 @@ public class BowlingTests
     [Test]
     public void StrikeNonSpareNonSpareCheck()
     {
-        Game game = new Game();
+        BowlingGame game = new BowlingGame();
 
         game.Roll(10);
 
@@ -25,7 +24,7 @@ public class BowlingTests
     [Test]
     public void StrikeNonSpareSpareNonSpareCheck()
     {
-        Game game = new Game();
+        BowlingGame game = new BowlingGame();
 
         game.Roll(10);
 
@@ -44,7 +43,7 @@ public class BowlingTests
     [Test]
     public void StrikeSpareNonSpareCheck()
     {
-        Game game = new Game();
+        BowlingGame game = new BowlingGame();
 
         game.Roll(10);
 
@@ -60,7 +59,7 @@ public class BowlingTests
     [Test]
     public void NonSpareSpareStrikeNonSpareCheck()
     {
-        Game game = new Game();
+        BowlingGame game = new BowlingGame();
 
         game.Roll(1);
         game.Roll(1);
@@ -79,7 +78,7 @@ public class BowlingTests
     [Test]
     public void AllOnesCheck()
     {
-        Game game = new Game();
+        BowlingGame game = new BowlingGame();
 
         for (int i = 0; i < 10; i++)
         {
@@ -93,7 +92,7 @@ public class BowlingTests
     [Test]
     public void StrikeStrikeStrikeNonSpareNonSpareCheck()
     {
-        Game game = new Game();
+        BowlingGame game = new BowlingGame();
 
         for (int i = 0; i < 3; i++)
             game.Roll(10);
@@ -110,7 +109,7 @@ public class BowlingTests
     [Test]
     public void AllStrikesCheck()
     {
-        Game game = new Game();
+        BowlingGame game = new BowlingGame();
 
         for (int i = 0; i < 9; i++)
         {
@@ -127,7 +126,7 @@ public class BowlingTests
     [Test]
     public void MoreThanTenFrames()
     {
-        Game game = new Game();
+        BowlingGame game = new BowlingGame();
 
         for (int i = 0; i < 10; i++)
         {
@@ -148,7 +147,7 @@ public class BowlingTests
     [Test]
     public void DoubleStrikeAtTenthFrame()
     {
-        Game game = new Game();
+        BowlingGame game = new BowlingGame();
 
         for (int i = 0; i < 9; i++)
         {
@@ -165,7 +164,7 @@ public class BowlingTests
     [Test]
     public void RandomTest()
     {
-        Game game = new Game();
+        BowlingGame game = new BowlingGame();
 
         game.Roll(1);
         game.Roll(4);

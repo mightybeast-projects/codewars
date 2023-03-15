@@ -1,7 +1,6 @@
 using NUnit.Framework;
-using FirstVariant;
 
-namespace BowlingTests;
+namespace BowlingGame.FirstVariant;
 
 [TestFixture]
 public class SpareTests
@@ -9,7 +8,7 @@ public class SpareTests
     [Test]
     public void CheckForSpareFrame()
     {
-        Game game = new Game();
+        BowlingGame game = new BowlingGame();
         game.Roll(5);
         game.Roll(5);
 
@@ -19,7 +18,7 @@ public class SpareTests
     [Test]
     public void CheckForNotSpareFrameAfterNotSpareFrame()
     {
-        Game game = new Game();
+        BowlingGame game = new BowlingGame();
 
         game.Roll(5);
         game.Roll(5);
@@ -33,7 +32,7 @@ public class SpareTests
     [Test]
     public void AddSpareBonusAfterSpareFrame()
     {
-        Game game = new Game();
+        BowlingGame game = new BowlingGame();
 
         game.Roll(7);
         game.Roll(3);

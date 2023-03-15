@@ -1,7 +1,6 @@
 using NUnit.Framework;
-using FirstVariant;
 
-namespace BowlingTests;
+namespace BowlingGame.FirstVariant;
 
 [TestFixture]
 public class FrameTests
@@ -9,7 +8,7 @@ public class FrameTests
     [Test]
     public void FreshGameStartsAtFirstFrame()
     {
-        Game game = new Game();
+        BowlingGame game = new BowlingGame();
 
         Assert.AreEqual(1, game.currentFrame);
     }
@@ -17,7 +16,7 @@ public class FrameTests
     [Test]
     public void AfterOneNonStrikeRollCurrentFrameIsOne()
     {
-        Game game = new Game();
+        BowlingGame game = new BowlingGame();
         game.Roll(0);
 
         Assert.AreEqual(1, game.currentFrame);
@@ -26,7 +25,7 @@ public class FrameTests
     [Test]
     public void AfterTwoNonSpareRollsCurrentFrameIsTwo()
     {
-        Game game = new Game();
+        BowlingGame game = new BowlingGame();
         game.Roll(2);
         game.Roll(5);
 
@@ -36,7 +35,7 @@ public class FrameTests
     [Test]
     public void CurrentFrameEqualsTwoAfterStrikeFrame()
     {
-        Game game = new Game();
+        BowlingGame game = new BowlingGame();
 
         game.Roll(10);
 

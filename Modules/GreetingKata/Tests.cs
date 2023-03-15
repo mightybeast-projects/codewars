@@ -3,7 +3,7 @@ using NUnit.Framework;
 namespace GreetingKata;
 
 [TestFixture]
-public class GreetingModuleTests
+public class Tests
 {
     private GreetingModule module;
 

@@ -1,10 +1,9 @@
 using NUnit.Framework;
-using SecondVariant;
 
-namespace BowlingGameTests;
+namespace BowlingGame.SecondVariant;
 
 [TestFixture]
-public class BaseGameTest
+public class Tests
 {
     private BowlingGame game;
     [Test]

@@ -3,7 +3,7 @@ using NUnit.Framework;
 namespace ArrayStats;
 
 [TestFixture]
-public class ArrayStatsTests
+public class Tests
 {
     private ArrayStats _arrayStats;
 

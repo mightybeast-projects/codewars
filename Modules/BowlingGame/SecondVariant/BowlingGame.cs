@@ -1,5 +1,4 @@
-
-namespace SecondVariant;
+namespace BowlingGame.SecondVariant;
 
 public class BowlingGame
 {

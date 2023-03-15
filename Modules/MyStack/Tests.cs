@@ -3,7 +3,7 @@ using NUnit.Framework;
 namespace MyStack;
 
 [TestFixture]
-public class MyStackTests
+public class Tests
 {
     private MyStack stack;
 

@@ -1,5 +1,6 @@
-namespace FirstVariant;
-internal class Game
+namespace BowlingGame.FirstVariant;
+
+internal class BowlingGame
 {
     internal int score => _score;
     internal int currentFrame => _currentFrame;

@@ -1,7 +1,6 @@
 using NUnit.Framework;
-using FirstVariant;
 
-namespace BowlingTests;
+namespace BowlingGame.FirstVariant;
 
 [TestFixture]
 public class StrikeTests
@@ -9,7 +8,7 @@ public class StrikeTests
     [Test]
     public void CheckForStrikeFrame()
     {
-        Game game = new Game();
+        BowlingGame game = new BowlingGame();
 
         game.Roll(10);
 
@@ -19,7 +18,7 @@ public class StrikeTests
     [Test]
     public void CheckForStrikeCounterAfterDoubleStrike()
     {
-        Game game = new Game();
+        BowlingGame game = new BowlingGame();
 
         game.Roll(10);
         game.Roll(10);
@@ -30,7 +29,7 @@ public class StrikeTests
     [Test]
     public void CheckForNotStrikeFrameAfterNonStrikeFrame()
     {
-        Game game = new Game();
+        BowlingGame game = new BowlingGame();
 
         game.Roll(10);
 
@@ -43,7 +42,7 @@ public class StrikeTests
     [Test]
     public void AddStrikeFrameBonus()
     {
-        Game game = new Game();
+        BowlingGame game = new BowlingGame();
 
         game.Roll(10);
 
@@ -56,7 +55,7 @@ public class StrikeTests
     [Test]
     public void StrikeStrikeNonSpareCheck()
     {
-        Game game = new Game();
+        BowlingGame game = new BowlingGame();
 
         game.Roll(10);
         game.Roll(10);
