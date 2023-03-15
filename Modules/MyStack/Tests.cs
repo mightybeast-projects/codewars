@@ -7,27 +7,18 @@ public class Tests
 {
     private MyStack stack;
 
-    [Test]
-    public void NewStackIsEmpty()
-    {
-        stack = new MyStack();
-
-        Assert.IsTrue(stack.IsEmpty);
-    }
+    [SetUp]
+    public void SetUp() => stack = new MyStack();
 
     [Test]
-    public void NewStackSizeEqualsZero()
-    {
-        stack = new MyStack();
+    public void NewStackIsEmpty() => Assert.IsTrue(stack.IsEmpty);
 
-        Assert.AreEqual(0, stack.Size);
-    }
+    [Test]
+    public void NewStackSizeEqualsZero() => Assert.AreEqual(0, stack.Size);
 
     [Test]
     public void StackIsNotEmptyWhenOneVariablePushed()
     {
-        stack = new MyStack();
-
         stack.Push(1);
 
         Assert.IsFalse(stack.IsEmpty);
@@ -36,8 +27,6 @@ public class Tests
     [Test]
     public void StackSizeEqualsOneAfterOnePush()
     {
-        stack = new MyStack();
-
         stack.Push(1);
 
         Assert.AreEqual(1, stack.Size);
@@ -46,8 +35,6 @@ public class Tests
     [Test]
     public void StackSizeEqualsOneAfterTwoPushOnePop()
     {
-        stack = new MyStack();
-
         stack.Push(1);
         stack.Push(2);
         stack.Pop();
@@ -58,48 +45,34 @@ public class Tests
     [Test]
     public void PushOnePopOneReturnsFirstElement()
     {
-        stack = new MyStack();
+        stack.Push(1);
 
-        int element = 1;
-        stack.Push(element);
-        int popedElement = stack.Pop();
-
-        Assert.AreEqual(element, popedElement);
+        Assert.AreEqual(1, stack.Pop());
     }
 
     [Test]
     public void PushTwoPopOneReturnLastInsertedValue()
     {
-        stack = new MyStack();
+        stack.Push(1);
+        stack.Push(2);
 
-        int element = 1;
-        stack.Push(element);
-        element = 2;
-        stack.Push(element);
-        int popedElement = stack.Pop();
-
-        Assert.AreEqual(element, popedElement);
+        Assert.AreEqual(2, stack.Pop());
     }
 
     [Test]
     public void PushTwoPopTwoReturnFirstInsertedValue()
     {
-        stack = new MyStack();
-        int firstElement = 1;
-
-        stack.Push(firstElement);
+        stack.Push(1);
         stack.Push(2);
 
         stack.Pop();
 
-        Assert.AreEqual(firstElement, stack.Pop());
+        Assert.AreEqual(1, stack.Pop());
     }
 
     [Test]
     public void StackSizeAfterTwoPushOnePopEqualsOne()
     {
-        stack = new MyStack();
-
         stack.Push(1);
         stack.Push(1);
         stack.Pop();
@@ -110,25 +83,19 @@ public class Tests
     [Test]
     public void PushThreePopTwoReturnSecondElement()
     {
-        stack = new MyStack();
-        int secondElement = 100;
-
         stack.Push(10);
-        stack.Push(secondElement);
+        stack.Push(100);
         stack.Push(1000);
 
         stack.Pop();
 
-        Assert.AreEqual(secondElement, stack.Pop());
+        Assert.AreEqual(100, stack.Pop());
     }
 
     [Test]
     public void PushFivePopFiveReturnsFirstInsertedElements()
     {
-        stack = new MyStack();
-        int firstElement = 10;
-
-        stack.Push(firstElement);
+        stack.Push(10);
         stack.Push(100);
         stack.Push(1000);
         stack.Push(10000);
@@ -139,6 +106,6 @@ public class Tests
         stack.Pop();
         stack.Pop();
 
-        Assert.AreEqual(firstElement, stack.Pop());
+        Assert.AreEqual(10, stack.Pop());
     }
 }

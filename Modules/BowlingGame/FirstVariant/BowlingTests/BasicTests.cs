@@ -5,19 +5,18 @@ namespace BowlingGame.FirstVariant;
 [TestFixture]
 public class BasicTests
 {
-    [Test]
-    public void GameScoreEqualsZeroInNewGame()
-    {
-        BowlingGame game = new BowlingGame();
+    private BowlingGame game;
 
+    [SetUp]
+    public void SetUp() => game = new BowlingGame();
+
+    [Test]
+    public void GameScoreEqualsZeroInNewGame() =>
         Assert.AreEqual(0, game.score);
-    }
 
     [Test]
     public void GameScoreEqualsToKnockedPinsAfterOneRoll()
     {
-        BowlingGame game = new BowlingGame();
-
         game.Roll(3);
 
         Assert.AreEqual(3, game.score);
@@ -26,7 +25,6 @@ public class BasicTests
     [Test]
     public void GameScoreEqualsToSumOfKnockedPinsAfterSeveralRolls()
     {
-        BowlingGame game = new BowlingGame();
         game.Roll(2);
         game.Roll(4);
         game.Roll(5);
@@ -37,8 +35,6 @@ public class BasicTests
     [Test]
     public void DoNotCountPinsAfterTenthFrame()
     {
-        BowlingGame game = new BowlingGame();
-
         for (int i = 0; i < 22; i++)
             game.Roll(1);
 
@@ -48,13 +44,8 @@ public class BasicTests
     [Test]
     public void CountSpareRollAfterTenthFrame()
     {
-        BowlingGame game = new BowlingGame();
-
-        for (int i = 0; i < 9; i++)
-        {
+        for (int i = 0; i < 18; i++)
             game.Roll(1);
-            game.Roll(1);
-        }
 
         game.Roll(5);
         game.Roll(5);
@@ -66,13 +57,8 @@ public class BasicTests
     [Test]
     public void CountStrikeRollAfterTenthFrame()
     {
-        BowlingGame game = new BowlingGame();
-
-        for (int i = 0; i < 9; i++)
-        {
+        for (int i = 0; i < 18; i++)
             game.Roll(1);
-            game.Roll(1);
-        }
 
         game.Roll(10);
         game.Roll(3);
@@ -84,17 +70,11 @@ public class BasicTests
     [Test]
     public void ThreeStrikesAtTenthFrame()
     {
-        BowlingGame game = new BowlingGame();
-
-        for (int i = 0; i < 9; i++)
-        {
+        for (int i = 0; i < 18; i++)
             game.Roll(1);
-            game.Roll(1);
-        }
 
-        game.Roll(10);
-        game.Roll(10);
-        game.Roll(10);
+        for (int i = 0; i < 3; i++)
+            game.Roll(10);
 
         Assert.AreEqual(48, game.score);
     }
@@ -102,17 +82,11 @@ public class BasicTests
     [Test]
     public void ThreeStrikesAtTenthFrameEndsGame()
     {
-        BowlingGame game = new BowlingGame();
-
-        for (int i = 0; i < 9; i++)
-        {
+        for (int i = 0; i < 18; i++)
             game.Roll(1);
-            game.Roll(1);
-        }
 
-        game.Roll(10);
-        game.Roll(10);
-        game.Roll(10);
+        for (int i = 0; i < 3; i++)
+            game.Roll(10);
 
         game.Roll(1);
 

@@ -5,11 +5,14 @@ namespace BowlingGame.FirstVariant;
 [TestFixture]
 public class BowlingTests
 {
+    private BowlingGame game;
+
+    [SetUp]
+    public void SetUp() => game = new BowlingGame();
+
     [Test]
     public void StrikeNonSpareNonSpareCheck()
     {
-        BowlingGame game = new BowlingGame();
-
         game.Roll(10);
 
         game.Roll(1);
@@ -24,8 +27,6 @@ public class BowlingTests
     [Test]
     public void StrikeNonSpareSpareNonSpareCheck()
     {
-        BowlingGame game = new BowlingGame();
-
         game.Roll(10);
 
         game.Roll(1);
@@ -43,8 +44,6 @@ public class BowlingTests
     [Test]
     public void StrikeSpareNonSpareCheck()
     {
-        BowlingGame game = new BowlingGame();
-
         game.Roll(10);
 
         game.Roll(2);
@@ -59,8 +58,6 @@ public class BowlingTests
     [Test]
     public void NonSpareSpareStrikeNonSpareCheck()
     {
-        BowlingGame game = new BowlingGame();
-
         game.Roll(1);
         game.Roll(1);
 
@@ -78,13 +75,8 @@ public class BowlingTests
     [Test]
     public void AllOnesCheck()
     {
-        BowlingGame game = new BowlingGame();
-
-        for (int i = 0; i < 10; i++)
-        {
+        for (int i = 0; i < 20; i++)
             game.Roll(1);
-            game.Roll(1);
-        }
 
         Assert.AreEqual(20, game.score);
     }
@@ -92,8 +84,6 @@ public class BowlingTests
     [Test]
     public void StrikeStrikeStrikeNonSpareNonSpareCheck()
     {
-        BowlingGame game = new BowlingGame();
-
         for (int i = 0; i < 3; i++)
             game.Roll(10);
 
@@ -109,12 +99,8 @@ public class BowlingTests
     [Test]
     public void AllStrikesCheck()
     {
-        BowlingGame game = new BowlingGame();
-
         for (int i = 0; i < 9; i++)
-        {
             game.Roll(10);
-        }
 
         game.Roll(10);
         game.Roll(10);
@@ -126,13 +112,8 @@ public class BowlingTests
     [Test]
     public void MoreThanTenFrames()
     {
-        BowlingGame game = new BowlingGame();
-
-        for (int i = 0; i < 10; i++)
-        {
+        for (int i = 0; i < 20; i++)
             game.Roll(1);
-            game.Roll(1);
-        }
 
         game.Roll(1);
         game.Roll(1);
@@ -147,12 +128,8 @@ public class BowlingTests
     [Test]
     public void DoubleStrikeAtTenthFrame()
     {
-        BowlingGame game = new BowlingGame();
-
         for (int i = 0; i < 9; i++)
-        {
             game.Roll(10);
-        }
 
         game.Roll(10);
         game.Roll(1);
@@ -164,8 +141,6 @@ public class BowlingTests
     [Test]
     public void RandomTest()
     {
-        BowlingGame game = new BowlingGame();
-
         game.Roll(1);
         game.Roll(4);
 
@@ -182,6 +157,7 @@ public class BowlingTests
 
         game.Roll(0);
         game.Roll(1);
+
         Assert.AreEqual(61, game.score);
 
         game.Roll(7);
@@ -191,6 +167,7 @@ public class BowlingTests
         game.Roll(4);
 
         game.Roll(10);
+
         Assert.AreEqual(107, game.score);
 
         game.Roll(2);

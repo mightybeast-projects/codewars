@@ -19,7 +19,7 @@ internal class BowlingGame
 
     private bool _isBonusRoll;
 
-    internal void Roll(int pins)
+    public void Roll(int pins)
     {
         if (PlayerTripleStrikedOnTenthFrame()) return;
 

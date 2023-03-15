@@ -5,10 +5,14 @@ namespace BowlingGame.FirstVariant;
 [TestFixture]
 public class SpareTests
 {
+    private BowlingGame game;
+
+    [SetUp]
+    public void SetUp() => game = new BowlingGame();
+
     [Test]
     public void CheckForSpareFrame()
     {
-        BowlingGame game = new BowlingGame();
         game.Roll(5);
         game.Roll(5);
 
@@ -18,8 +22,6 @@ public class SpareTests
     [Test]
     public void CheckForNotSpareFrameAfterNotSpareFrame()
     {
-        BowlingGame game = new BowlingGame();
-
         game.Roll(5);
         game.Roll(5);
 
@@ -32,8 +34,6 @@ public class SpareTests
     [Test]
     public void AddSpareBonusAfterSpareFrame()
     {
-        BowlingGame game = new BowlingGame();
-
         game.Roll(7);
         game.Roll(3);
 

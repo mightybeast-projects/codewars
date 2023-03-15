@@ -5,11 +5,14 @@ namespace BowlingGame.FirstVariant;
 [TestFixture]
 public class StrikeTests
 {
+    private BowlingGame game;
+
+    [SetUp]
+    public void SetUp() => game = new BowlingGame();
+
     [Test]
     public void CheckForStrikeFrame()
     {
-        BowlingGame game = new BowlingGame();
-
         game.Roll(10);
 
         Assert.AreEqual(true, game.hadStrikeLastFrame);
@@ -18,8 +21,6 @@ public class StrikeTests
     [Test]
     public void CheckForStrikeCounterAfterDoubleStrike()
     {
-        BowlingGame game = new BowlingGame();
-
         game.Roll(10);
         game.Roll(10);
 
@@ -29,8 +30,6 @@ public class StrikeTests
     [Test]
     public void CheckForNotStrikeFrameAfterNonStrikeFrame()
     {
-        BowlingGame game = new BowlingGame();
-
         game.Roll(10);
 
         game.Roll(3);
@@ -42,8 +41,6 @@ public class StrikeTests
     [Test]
     public void AddStrikeFrameBonus()
     {
-        BowlingGame game = new BowlingGame();
-
         game.Roll(10);
 
         game.Roll(1);
@@ -55,8 +52,6 @@ public class StrikeTests
     [Test]
     public void StrikeStrikeNonSpareCheck()
     {
-        BowlingGame game = new BowlingGame();
-
         game.Roll(10);
         game.Roll(10);
 

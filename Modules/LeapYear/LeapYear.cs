@@ -2,11 +2,11 @@ namespace LeapYear;
 
 public class LeapYear
 {
-    private int _year;
+    private int year;
 
     public bool IsLeap(int year)
     {
-        _year = year;
+        this.year = year;
 
         if (YearIsDividableBy(400)) return true;
         if (YearIsDividableBy(100)) return false;
@@ -14,8 +14,5 @@ public class LeapYear
         return false;
     }
 
-    private bool YearIsDividableBy(int number)
-    {
-        return _year % number == 0;
-    }
+    private bool YearIsDividableBy(int number) => year % number == 0;
 }

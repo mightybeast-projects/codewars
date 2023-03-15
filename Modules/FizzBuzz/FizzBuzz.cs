@@ -4,53 +4,38 @@ namespace FizzBuzz;
 
 public class FizzBuzz
 {
-    public int[] array => _array;
-
-    private int[] _array = new int[100];
-
-    private int _element;
-    private StringBuilder _output;
+    private StringBuilder output;
+    private int[] array = new int[100];
+    private int element;
 
     public FizzBuzz()
     {
         for (int i = 1; i <= 100; i++)
-            _array[i - 1] = i;
-    }
-
-    public void Print()
-    {
-        for (int i = 0; i < 100; i++)
-            Console.WriteLine(ElementAt(i));
+            array[i - 1] = i;
     }
 
     internal string ElementAt(int index)
     {
-        _element = _array[index];
-        _output = new StringBuilder();
+        element = array[index];
+        output = new StringBuilder();
 
         CheckDivisibles();
 
         if (ElementIsNotDivisible())
-            _output.Append(_element);
+            output.Append(element);
 
-        return _output.ToString();
+        return output.ToString();
     }
 
     private void CheckDivisibles()
     {
         if (ElementDivisibleBy(3))
-            _output.Append("Fizz");
+            output.Append("Fizz");
         if (ElementDivisibleBy(5))
-            _output.Append("Buzz");
+            output.Append("Buzz");
     }
 
-    private bool ElementDivisibleBy(int number)
-    {
-        return _element % number == 0;
-    }
+    private bool ElementDivisibleBy(int number) => element % number == 0;
 
-    private bool ElementIsNotDivisible()
-    {
-        return _output.ToString() == "";
-    }
+    private bool ElementIsNotDivisible() => output.ToString() == "";
 }

@@ -2,30 +2,24 @@ namespace MyStack;
 
 public class MyStack
 {
-    public int Size => _size;
-    public bool IsEmpty => _isEmpty;
+    public int Size => size;
+    public bool IsEmpty => isEmpty;
 
-    private bool _isEmpty = true;
-    private int[] _array;
-    private int _size;
-    private int _lastPushedElement;
+    private bool isEmpty = true;
+    private int[] array;
+    private int size;
+    private int lastPushedElement;
 
-    public MyStack()
-    {
-        _array = new int[10];
-    }
+    public MyStack() => array = new int[10];
 
     public void Push(int item)
     {
-        _lastPushedElement = item;
-        _array[_size] = item;
-        _size++;
+        lastPushedElement = item;
+        array[size] = item;
+        size++;
 
-        _isEmpty = false;
+        isEmpty = false;
     }
 
-    public int Pop()
-    {
-        return _array[--_size];
-    }
+    public int Pop() => array[--size];
 }

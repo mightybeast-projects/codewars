@@ -2,60 +2,63 @@ namespace BowlingGame.SecondVariant;
 
 public class BowlingGame
 {
-    private int[] _rolls = new int[21];
-    private int _downedPins;
-    private int _currentIndex;
-    private int _frameScore;
-    int _totalScore = 0;
-    int _frameIndex = 0;
+    private int[] rolls = new int[21];
+    private int downedPins;
+    private int currentIndex;
+    private int frameScore;
+    private int totalScore = 0;
+    private int frameIndex = 0;
 
-    internal void Roll(int pins)
+    public void Roll(int pins)
     {
-        _downedPins = pins;
+        downedPins = pins;
         try { AddPinsToArray(); }
         catch (Exception) { return; }
     }
 
-    internal int Score()
+    public int Score()
     {
         for (int frame = 0; frame < 10; frame++)
-        {
-            _frameScore = _rolls[_frameIndex] + _rolls[_frameIndex + 1];
+            CalculateFrameScore();
 
-            if (_rolls[_frameIndex] == 10)
-                HandleStrikeRoll();
-            else if (_frameScore == 10)
-                HandleSpareFrame();
-            else
-                HandleSimpleFrame();
+        return totalScore;
+    }
 
-            _frameScore = 0;
-        }
+    private void CalculateFrameScore()
+    {
+        frameScore = rolls[frameIndex] + rolls[frameIndex + 1];
 
-        return _totalScore;
+        if (rolls[frameIndex] == 10)
+            HandleStrikeRoll();
+        else if (frameScore == 10)
+            HandleSpareFrame();
+        else
+            HandleSimpleFrame();
+
+        frameScore = 0;
     }
 
     private void HandleSimpleFrame()
     {
-        _totalScore += _frameScore;
-        _frameIndex += 2;
+        totalScore += frameScore;
+        frameIndex += 2;
     }
 
     private void HandleSpareFrame()
     {
-        _totalScore += 10 + _rolls[_frameIndex + 2];
-        _frameIndex += 2;
+        totalScore += 10 + rolls[frameIndex + 2];
+        frameIndex += 2;
     }
 
     private void HandleStrikeRoll()
     {
-        _totalScore += 10 + _rolls[_frameIndex + 1] + _rolls[_frameIndex + 2];
-        _frameIndex++;
+        totalScore += 10 + rolls[frameIndex + 1] + rolls[frameIndex + 2];
+        frameIndex++;
     }
 
     private void AddPinsToArray()
     {
-        _rolls[_currentIndex] = _downedPins;
-        _currentIndex++;
+        rolls[currentIndex] = downedPins;
+        currentIndex++;
     }
 }

@@ -5,40 +5,20 @@ namespace LeapYear;
 [TestFixture]
 public class Tests
 {
-    LeapYear leapYear;
+    private LeapYear leapYear;
 
     [SetUp]
-    public void SetUp()
-    {
-        leapYear = new LeapYear();
-    }
+    public void SetUp() => leapYear = new LeapYear();
 
     [Test]
-    public void Year2001IsNotLeap()
-    {
-        Assert.IsFalse(YearIsLeap(2001));
-    }
+    [TestCase(1996)]
+    [TestCase(2000)]
+    public void TestLeapYear(int year) =>
+        Assert.IsTrue(leapYear.IsLeap(year));
 
     [Test]
-    public void Year1996IsLeap()
-    {
-        Assert.IsTrue(YearIsLeap(1996));
-    }
-
-    [Test]
-    public void Year1900IsNotLeap()
-    {
-        Assert.IsFalse(YearIsLeap(1900));
-    }
-
-    [Test]
-    public void Year2000IsLeap()
-    {
-        Assert.IsTrue(YearIsLeap(2000));
-    }
-
-    private bool YearIsLeap(int year)
-    {
-        return leapYear.IsLeap(year);
-    }
+    [TestCase(1900)]
+    [TestCase(2001)]
+    public void TestNonLeapYear(int year) =>
+        Assert.IsFalse(leapYear.IsLeap(year));
 }

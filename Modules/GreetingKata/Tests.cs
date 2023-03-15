@@ -7,70 +7,21 @@ public class Tests
 {
     private GreetingModule module;
 
-    [Test]
-    public void SimpleGreet()
-    {
-        module = new GreetingModule();
-
-        Assert.AreEqual("Hello, Bob.", module.Greet("Bob"));
-    }
+    [SetUp]
+    public void SetUp() => module = new GreetingModule();
 
     [Test]
-    public void NullGreet()
-    {
-        module = new GreetingModule();
-
+    public void NullGreet() =>
         Assert.AreEqual("Hello, my friend.", module.Greet(null));
-    }
 
     [Test]
-    public void ShoutGreet()
-    {
-        module = new GreetingModule();
-
-        Assert.AreEqual("HELLO BOB!", module.Greet("BOB"));
-    }
-
-    [Test]
-    public void TwoPeopleGreet()
-    {
-        module = new GreetingModule();
-
-        Assert.AreEqual("Hello, Bob and Mike.", module.Greet("Bob", "Mike"));
-    }
-
-    [Test]
-    public void ThreePeopleGreet()
-    {
-        module = new GreetingModule();
-
-        Assert.AreEqual("Hello, Bob, Fred, and Mike.", module.Greet("Bob", "Fred", "Mike"));
-    }
-
-    [Test]
-    public void MixedGreet()
-    {
-        module = new GreetingModule();
-
-        Assert.AreEqual("Hello, Bob and Mike. AND HELLO FRED!",
-                        module.Greet("Bob", "FRED", "Mike"));
-    }
-
-    [Test]
-    public void NameContainsCommaGreet()
-    {
-        module = new GreetingModule();
-
-        Assert.AreEqual("Hello, Bob, Fred, and Mike.",
-                        module.Greet("Bob", "Fred, Mike"));
-    }
-
-    [Test]
-    public void IntentionalCommasGreet()
-    {
-        module = new GreetingModule();
-
-        Assert.AreEqual("Hello, Bob and Fred, Mike.",
-                        module.Greet("Bob", "\"Fred, Mike\""));
-    }
+    [TestCase("Hello, Bob.", "Bob")]
+    [TestCase("HELLO BOB!", "BOB")]
+    [TestCase("Hello, Bob and Mike.", "Bob", "Mike")]
+    [TestCase("Hello, Bob, Fred, and Mike.", "Bob", "Fred", "Mike")]
+    [TestCase("Hello, Bob and Mike. AND HELLO FRED!", "Bob", "FRED", "Mike")]
+    [TestCase("Hello, Bob, Fred, and Mike.", "Bob", "Fred, Mike")]
+    [TestCase("Hello, Bob and Fred, Mike.", "Bob", "\"Fred, Mike\"")]
+    public void TestGreetingModule(string result, params string[] names) =>
+        Assert.AreEqual(result, module.Greet(names));
 }
