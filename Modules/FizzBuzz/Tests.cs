@@ -5,35 +5,15 @@ namespace FizzBuzz;
 [TestFixture]
 public class Tests
 {
-    private FizzBuzz _game;
-
-    [SetUp]
-    public void SetUp()
-    {
-        _game = new FizzBuzz();
-    }
-
     [Test]
-    public void InitializationTest()
+    [TestCase("1", 0)]
+    [TestCase("Fizz", 2)]
+    [TestCase("Buzz", 4)]
+    [TestCase("FizzBuzz", 14)]
+    public void ElementAtPositionEqualsTo(string element, int index)
     {
-        Assert.AreEqual("1", _game.ElementAt(0));
-    }
+        FizzBuzz game = new FizzBuzz();
 
-    [Test]
-    public void DivisibleByThreeTest()
-    {
-        Assert.AreEqual("Fizz", _game.ElementAt(2));
-    }
-
-    [Test]
-    public void DivisibleByFiveTest()
-    {
-        Assert.AreEqual("Buzz", _game.ElementAt(4));
-    }
-
-    [Test]
-    public void DivisibleByThreeAndFiveTest()
-    {
-        Assert.AreEqual("FizzBuzz", _game.ElementAt(14));
+        Assert.AreEqual(element, game.ElementAt(index));
     }
 }
