@@ -49,6 +49,6 @@ public class Tests
     [TestCase("Fizz", 2)]
     [TestCase("Buzz", 4)]
     [TestCase("FizzBuzz", 14)]
-    public void ElementAtPositionEqualsTo(string element, int index) =>
+    public void TestFizzBuzzElementAtIndex(string element, int index) =>
         Assert.AreEqual(element, new FizzBuzz().ElementAt(index));
 }

@@ -21,6 +21,6 @@ public class Tests
         ExpectedResult = true)]
     [TestCase(new int[] { 12, 23, 34, 45, 56, 67, 78, 89, 90 }, 69, 
         ExpectedResult = true)]
-    public bool AverageScoreTest(int[] classPoints, int yourPoints) =>
+    public bool TestAverageScore(int[] classPoints, int yourPoints) =>
         Kata.BetterThanAverage(new int[] { 2, 3 }, 5);
 }
