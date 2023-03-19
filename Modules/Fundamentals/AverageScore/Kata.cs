@@ -19,19 +19,13 @@ public class Tests
     public bool TestAverageScore(int[] classPoints, int yourPoints) =>
         Kata.BetterThanAverage(classPoints, yourPoints);
 
-    private static IEnumerable<TestCaseData> cases
+    private static TestCaseData[] cases =
     {
-        get
-        {
-            yield return new TestCaseData(
-                new int[] { 2, 3 }, 5)
-                .Returns(true);
-            yield return new TestCaseData(
-                new int[] { 100, 40, 34, 57, 29, 72, 57, 88 }, 75)
-                .Returns(true);
-            yield return new TestCaseData(
-                new int[] { 12, 23, 34, 45, 56, 67, 78, 89, 90 }, 69)
-                .Returns(true);
-        }
-    }
+        new TestCaseData(new int[] { 2, 3 }, 5)
+            .Returns(true),
+        new TestCaseData(new int[] { 100, 40, 34, 57, 29, 72, 57, 88 }, 75)
+            .Returns(true),
+        new TestCaseData(new int[] { 12, 23, 34, 45, 56, 67, 78, 89, 90 }, 69)
+            .Returns(true),
+    };
 }

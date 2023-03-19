@@ -21,16 +21,13 @@ public class Tests
     [Test, TestCaseSource(nameof(cases))]
     public bool TestIsogram(string s) => Kata.IsIsogram(s);
 
-    private static IEnumerable<TestCaseData> cases
+    private static TestCaseData[] cases =
     {
-        get
-        {
-            yield return new TestCaseData("").Returns(true);
-            yield return new TestCaseData("a").Returns(true);
-            yield return new TestCaseData("aa").Returns(false);
-            yield return new TestCaseData("Dermatoglyphics").Returns(true);
-            yield return new TestCaseData("isIsogram").Returns(false);
-            yield return new TestCaseData("moOse").Returns(false);
-        }
-    }
+        new TestCaseData("").Returns(true),
+        new TestCaseData("a").Returns(true),
+        new TestCaseData("aa").Returns(false),
+        new TestCaseData("Dermatoglyphics").Returns(true),
+        new TestCaseData("isIsogram").Returns(false),
+        new TestCaseData("moOse").Returns(false)
+    };
 }

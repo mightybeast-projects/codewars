@@ -24,14 +24,11 @@ public class Tests
     [Test, TestCaseSource(nameof(cases))]
     public string TestMumblingString(string s) => Kata.Mumble(s);
 
-    private static IEnumerable<TestCaseData> cases
+    private static TestCaseData[] cases =
     {
-        get
-        {
-            yield return new TestCaseData("a").Returns("A");
-            yield return new TestCaseData("ab").Returns("A-Bb");
-            yield return new TestCaseData("abc").Returns("A-Bb-Ccc");
-            yield return new TestCaseData("abcD").Returns("A-Bb-Ccc-Dddd");
-        }
-    }
+        new TestCaseData("a").Returns("A"),
+        new TestCaseData("ab").Returns("A-Bb"),
+        new TestCaseData("abc").Returns("A-Bb-Ccc"),
+        new TestCaseData("abcD").Returns("A-Bb-Ccc-Dddd")
+    };
 }

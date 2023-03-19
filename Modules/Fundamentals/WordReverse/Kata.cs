@@ -29,14 +29,11 @@ public class Tests
     public string WordReverseTest(string input) =>
         Kata.ReverseWords(input);
 
-    private static IEnumerable<TestCaseData> cases
+    private static TestCaseData[] cases =
     {
-        get
-        {
-            yield return new TestCaseData("This").Returns("sihT");
-            yield return new TestCaseData("This is").Returns("sihT si");
-            yield return new TestCaseData("This is an example!")
-                .Returns("sihT si na !elpmaxe");
-        }
-    }
+        new TestCaseData("This").Returns("sihT"),
+        new TestCaseData("This is").Returns("sihT si"),
+        new TestCaseData("This is an example!")
+            .Returns("sihT si na !elpmaxe")
+    };
 }

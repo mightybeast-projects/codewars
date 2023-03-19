@@ -34,30 +34,21 @@ public class Tests
     public string TestConsecutiveStrings(string[] strs, int k)
         => Kata.GetConsecutiveStrings(strs, k);
 
-    private static IEnumerable<TestCaseData> cases
+    private static TestCaseData[] cases =
     {
-        get
-        {
-            yield return new TestCaseData(new string[] { }, 2).Returns("");
-            yield return new TestCaseData(new[] { "aaa" }, 2).Returns("");
-            yield return new TestCaseData(new[] { "aaa" }, 0).Returns("");
-            yield return new TestCaseData(new[] { "aaa" }, -1).Returns("");
-            yield return new TestCaseData(new[] { "aaa" }, 1)
-                .Returns("aaa");
-            yield return new TestCaseData(new[] { "aaa", "bb", "c" }, 1)
-                .Returns("aaa");
-            yield return new TestCaseData(new[] { "aaa", "bb" }, 2)
-                .Returns("aaabb");
-            yield return new TestCaseData(new[] { "aaa", "bb", "c" }, 2)
-                .Returns("aaabb");
-            yield return new TestCaseData(new[] { "aaa", "bb", "c" }, 3)
-                .Returns("aaabbc");
-            yield return new TestCaseData(
-                new[] { "aaa", "bb", "c", "dddd" }, 3).Returns("bbcdddd");
-            yield return new TestCaseData(
-                new[] {"zone", "abigail", "theta",
-                "form", "libe", "zas", "theta", "abigail"}, 2)
-                .Returns("abigailtheta");
-        }
-    }
+        new TestCaseData(new string[] { }, 2).Returns(""),
+        new TestCaseData(new[] { "aaa" }, 2).Returns(""),
+        new TestCaseData(new[] { "aaa" }, 0).Returns(""),
+        new TestCaseData(new[] { "aaa" }, -1).Returns(""),
+        new TestCaseData(new[] { "aaa" }, 1).Returns("aaa"),
+        new TestCaseData(new[] { "aaa", "bb", "c" }, 1).Returns("aaa"),
+        new TestCaseData(new[] { "aaa", "bb" }, 2).Returns("aaabb"),
+        new TestCaseData(new[] { "aaa", "bb", "c" }, 2).Returns("aaabb"),
+        new TestCaseData(new[] { "aaa", "bb", "c" }, 3).Returns("aaabbc"),
+        new TestCaseData(new[] { "aaa", "bb", "c", "dddd" }, 3)
+            .Returns("bbcdddd"),
+        new TestCaseData(new[] {"zone", "abigail", "theta",
+            "form", "libe", "zas", "theta", "abigail"}, 2)
+            .Returns("abigailtheta")
+    };
 }

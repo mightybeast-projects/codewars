@@ -10,9 +10,8 @@ public class FrameTests
     [SetUp]
     public void SetUp() => game = new BowlingGame();
 
-    [Test]
-    public void FreshGameStartsAtFirstFrame() =>
-        Assert.AreEqual(1, game.currentFrame);
+    [Test(ExpectedResult = 1)]
+    public int FreshGameStartsAtFirstFrame() =>game.currentFrame;
 
     [Test]
     public void AfterOneNonStrikeRollCurrentFrameIsOne()

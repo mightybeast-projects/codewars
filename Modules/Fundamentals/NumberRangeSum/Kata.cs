@@ -23,16 +23,13 @@ public class Tests
     [Test, TestCaseSource(nameof(cases))]
     public int TestRangeSum(int a, int b) => Kata.GetSum(a, b);
 
-    private static IEnumerable<TestCaseData> cases
+    private static TestCaseData[] cases =
     {
-        get
-        {
-            yield return new TestCaseData(0, 0).Returns(0);
-            yield return new TestCaseData(1, 1).Returns(1);
-            yield return new TestCaseData(0, 1).Returns(1);
-            yield return new TestCaseData(0, 2).Returns(3);
-            yield return new TestCaseData(2, 0).Returns(3);
-            yield return new TestCaseData(-1, 2).Returns(2);
-        }
-    }
+        new TestCaseData(0, 0).Returns(0),
+        new TestCaseData(1, 1).Returns(1),
+        new TestCaseData(0, 1).Returns(1),
+        new TestCaseData(0, 2).Returns(3),
+        new TestCaseData(2, 0).Returns(3),
+        new TestCaseData(-1, 2).Returns(2)
+    };
 }

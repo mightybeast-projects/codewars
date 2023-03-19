@@ -48,14 +48,11 @@ public class Tests
     public string TestFizzBuzzElementAtIndex(int index) =>
         new FizzBuzz().ElementAt(index);
 
-    private static IEnumerable<TestCaseData> cases
+    private static TestCaseData[] cases =
     {
-        get
-        {
-            yield return new TestCaseData(0).Returns("1");
-            yield return new TestCaseData(2).Returns("Fizz");
-            yield return new TestCaseData(4).Returns("Buzz");
-            yield return new TestCaseData(14).Returns("FizzBuzz");
-        }
-    }
+        new TestCaseData(0).Returns("1"),
+        new TestCaseData(2).Returns("Fizz"),
+        new TestCaseData(4).Returns("Buzz"),
+        new TestCaseData(14).Returns("FizzBuzz")
+    };
 }

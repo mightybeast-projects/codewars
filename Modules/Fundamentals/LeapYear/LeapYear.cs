@@ -19,14 +19,11 @@ public class Tests
     [Test, TestCaseSource(nameof(cases))]
     public bool TestLeapYear(int year) => LeapYear.IsLeap(year);
 
-    private static IEnumerable<TestCaseData> cases
+    private static TestCaseData[] cases =
     {
-        get
-        {
-            yield return new TestCaseData(1996).Returns(true);
-            yield return new TestCaseData(2000).Returns(true);
-            yield return new TestCaseData(1900).Returns(false);
-            yield return new TestCaseData(2001).Returns(false);
-        }
-    }
+        new TestCaseData(1996).Returns(true),
+        new TestCaseData(2000).Returns(true),
+        new TestCaseData(1900).Returns(false),
+        new TestCaseData(2001).Returns(false)
+    };
 }
