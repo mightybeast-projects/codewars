@@ -25,9 +25,18 @@ public static class Kata
 [TestFixture]
 public class Tests
 {
-    [TestCase("This", ExpectedResult = "sihT")]
-    [TestCase("This  is", ExpectedResult = "sihT  si")]
-    [TestCase("This is an example!", ExpectedResult = "sihT si na !elpmaxe")]
+    [Test, TestCaseSource(nameof(cases))]
     public string WordReverseTest(string input) =>
         Kata.ReverseWords(input);
+
+    private static IEnumerable<TestCaseData> cases
+    {
+        get
+        {
+            yield return new TestCaseData("This").Returns("sihT");
+            yield return new TestCaseData("This is").Returns("sihT si");
+            yield return new TestCaseData("This is an example!")
+                .Returns("sihT si na !elpmaxe");
+        }
+    }
 }

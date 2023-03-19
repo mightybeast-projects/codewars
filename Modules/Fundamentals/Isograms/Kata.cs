@@ -18,11 +18,19 @@ public class Kata
 [TestFixture]
 public class Tests
 {
-    [TestCase("", ExpectedResult = true)]
-    [TestCase("a", ExpectedResult = true)]
-    [TestCase("aa", ExpectedResult = false)]
-    [TestCase("Dermatoglyphics", ExpectedResult = true)]
-    [TestCase("isIsogram", ExpectedResult = false)]
-    [TestCase("moOse", ExpectedResult = false)]
+    [Test, TestCaseSource(nameof(cases))]
     public bool TestIsogram(string s) => Kata.IsIsogram(s);
+
+    private static IEnumerable<TestCaseData> cases
+    {
+        get
+        {
+            yield return new TestCaseData("").Returns(true);
+            yield return new TestCaseData("a").Returns(true);
+            yield return new TestCaseData("aa").Returns(false);
+            yield return new TestCaseData("Dermatoglyphics").Returns(true);
+            yield return new TestCaseData("isIsogram").Returns(false);
+            yield return new TestCaseData("moOse").Returns(false);
+        }
+    }
 }

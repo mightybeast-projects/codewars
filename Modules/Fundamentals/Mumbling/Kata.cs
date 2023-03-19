@@ -21,9 +21,17 @@ public class Kata
 [TestFixture]
 public class Tests
 {
-    [TestCase("a", ExpectedResult = "A")]
-    [TestCase("ab", ExpectedResult = "A-Bb")]
-    [TestCase("abc", ExpectedResult = "A-Bb-Ccc")]
-    [TestCase("abcD", ExpectedResult = "A-Bb-Ccc-Dddd")]
+    [Test, TestCaseSource(nameof(cases))]
     public string TestMumblingString(string s) => Kata.Mumble(s);
+
+    private static IEnumerable<TestCaseData> cases
+    {
+        get
+        {
+            yield return new TestCaseData("a").Returns("A");
+            yield return new TestCaseData("ab").Returns("A-Bb");
+            yield return new TestCaseData("abc").Returns("A-Bb-Ccc");
+            yield return new TestCaseData("abcD").Returns("A-Bb-Ccc-Dddd");
+        }
+    }
 }

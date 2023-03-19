@@ -20,11 +20,19 @@ public class Kata
 [TestFixture]
 public class Tests
 {
-    [TestCase(0, 0, ExpectedResult = 0)]
-    [TestCase(1, 1, ExpectedResult = 1)]
-    [TestCase(0, 1, ExpectedResult = 1)]
-    [TestCase(0, 2, ExpectedResult = 3)]
-    [TestCase(2, 0, ExpectedResult = 3)]
-    [TestCase(-1, 2, ExpectedResult = 2)]
+    [Test, TestCaseSource(nameof(cases))]
     public int TestRangeSum(int a, int b) => Kata.GetSum(a, b);
+
+    private static IEnumerable<TestCaseData> cases
+    {
+        get
+        {
+            yield return new TestCaseData(0, 0).Returns(0);
+            yield return new TestCaseData(1, 1).Returns(1);
+            yield return new TestCaseData(0, 1).Returns(1);
+            yield return new TestCaseData(0, 2).Returns(3);
+            yield return new TestCaseData(2, 0).Returns(3);
+            yield return new TestCaseData(-1, 2).Returns(2);
+        }
+    }
 }
