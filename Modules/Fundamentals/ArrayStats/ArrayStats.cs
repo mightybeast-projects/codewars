@@ -1,4 +1,4 @@
-namespace ArrayStats;
+namespace codewars.Modules.Fundamentals.ArrayStats;
 
 public class ArrayStats
 {

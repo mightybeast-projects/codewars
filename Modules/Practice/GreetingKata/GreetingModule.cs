@@ -1,6 +1,6 @@
 using System.Text;
 
-namespace GreetingKata;
+namespace codewars.Modules.Practice.GreetingKata;
 
 public class GreetingModule
 {

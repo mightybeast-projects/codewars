@@ -1,6 +1,6 @@
 using NUnit.Framework;
 
-namespace BowlingGame.FirstVariant;
+namespace codewars.Modules.Practice.BowlingGame.FirstVariant.BowlingTests;
 
 [TestFixture]
 public class FrameTests
@@ -11,7 +11,7 @@ public class FrameTests
     public void SetUp() => game = new BowlingGame();
 
     [Test(ExpectedResult = 1)]
-    public int FreshGameStartsAtFirstFrame() =>game.currentFrame;
+    public int FreshGameStartsAtFirstFrame() => game.currentFrame;
 
     [Test]
     public void AfterOneNonStrikeRollCurrentFrameIsOne()

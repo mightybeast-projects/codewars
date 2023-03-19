@@ -1,6 +1,6 @@
 using NUnit.Framework;
 
-namespace ArrayStats;
+namespace codewars.Modules.Fundamentals.ArrayStats;
 
 [TestFixture]
 public class Tests

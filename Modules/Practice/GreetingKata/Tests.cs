@@ -1,6 +1,6 @@
 using NUnit.Framework;
 
-namespace GreetingKata;
+namespace codewars.Modules.Practice.GreetingKata;
 
 [TestFixture]
 public class Tests

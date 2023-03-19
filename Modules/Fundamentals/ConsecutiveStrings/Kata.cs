@@ -1,6 +1,6 @@
 using NUnit.Framework;
 
-namespace ConsecutiveStrings;
+namespace codewars.Modules.Fundamentals.ConsecutiveStrings;
 
 public class Kata
 {

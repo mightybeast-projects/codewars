@@ -1,6 +1,6 @@
 using NUnit.Framework;
 
-namespace MyStack;
+namespace codewars.Modules.Practice.MyStack;
 
 [TestFixture]
 public class Tests

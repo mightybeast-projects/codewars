@@ -1,6 +1,6 @@
 using NUnit.Framework;
 
-namespace AverageScore;
+namespace codewars.Modules.Fundamentals.AverageScore;
 
 public class Kata
 {

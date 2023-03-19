@@ -1,6 +1,6 @@
 using NUnit.Framework;
 
-namespace BowlingGame.SecondVariant;
+namespace codewars.Modules.Practice.BowlingGame.SecondVariant;
 
 [TestFixture]
 public class Tests

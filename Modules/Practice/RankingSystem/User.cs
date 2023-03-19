@@ -1,4 +1,4 @@
-namespace RankingSystem;
+namespace codewars.Modules.Practice.RankingSystem;
 
 public class User
 {

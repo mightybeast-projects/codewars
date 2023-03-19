@@ -1,4 +1,4 @@
-namespace BowlingGame.SecondVariant;
+namespace codewars.Modules.Practice.BowlingGame.SecondVariant;
 
 public class BowlingGame
 {

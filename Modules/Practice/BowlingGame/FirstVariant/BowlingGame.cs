@@ -1,4 +1,4 @@
-namespace BowlingGame.FirstVariant;
+namespace codewars.Modules.Practice.BowlingGame.FirstVariant;
 
 internal class BowlingGame
 {

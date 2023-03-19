@@ -1,7 +1,7 @@
 using System.Text;
 using NUnit.Framework;
 
-namespace FizzBuzz;
+namespace codewars.Modules.Fundamentals.FizzBuzz;
 
 public class FizzBuzz
 {

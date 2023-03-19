@@ -1,6 +1,6 @@
 using NUnit.Framework;
 
-namespace Bus;
+namespace codewars.Modules.Fundamentals.Bus;
 
 public static class Kata
 {

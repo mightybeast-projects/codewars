@@ -1,6 +1,6 @@
 using NUnit.Framework;
 
-namespace NumberRangeSum;
+namespace codewars.Modules.Fundamentals.NumberRangeSum;
 
 public class Kata
 {

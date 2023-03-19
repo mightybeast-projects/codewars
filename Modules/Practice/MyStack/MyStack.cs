@@ -1,4 +1,4 @@
-namespace MyStack;
+namespace codewars.Modules.Practice.MyStack;
 
 public class MyStack
 {

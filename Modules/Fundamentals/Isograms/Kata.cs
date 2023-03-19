@@ -1,7 +1,7 @@
 using System.Text.RegularExpressions;
 using NUnit.Framework;
 
-namespace Isograms;
+namespace codewars.Modules.Fundamentals.Isograms;
 
 public class Kata
 {

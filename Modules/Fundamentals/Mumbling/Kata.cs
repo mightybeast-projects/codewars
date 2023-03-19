@@ -1,6 +1,6 @@
 using NUnit.Framework;
 
-namespace Mumbling;
+namespace codewars.Modules.Fundamentals.Mumbling;
 
 public class Kata
 {

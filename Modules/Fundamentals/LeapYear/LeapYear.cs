@@ -1,6 +1,6 @@
 using NUnit.Framework;
 
-namespace LeapYear;
+namespace codewars.Modules.Fundamentals.LeapYear;
 
 public static class LeapYear
 {

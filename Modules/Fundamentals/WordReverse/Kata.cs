@@ -1,6 +1,6 @@
 using NUnit.Framework;
 
-namespace WordReverse;
+namespace codewars.Modules.Fundamentals.WordReverse;
 
 public static class Kata
 {

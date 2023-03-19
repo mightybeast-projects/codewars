@@ -1,6 +1,6 @@
 using NUnit.Framework;
 
-namespace RankingSystem;
+namespace codewars.Modules.Practice.RankingSystem;
 
 [TestFixture]
 public class Tests
