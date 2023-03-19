@@ -2,118 +2,103 @@ namespace BowlingGame.FirstVariant;
 
 internal class BowlingGame
 {
-    internal int score => _score;
-    internal int currentFrame => _currentFrame;
-    internal bool hadSpareFrame => _hadSpareLastFrame;
-    internal bool hadStrikeLastFrame => _hadStrikeLastFrame;
-
-    private int _currentFrame = 1;
-    private bool _frameStart = true;
-    private int _score;
-    private int _currentDownedPins;
-    private int _frameScore;
-
-    private bool _hadSpareLastFrame;
-    private bool _hadStrikeLastFrame;
-    private bool _hadDoubleStrike;
-
-    private bool _isBonusRoll;
+    public int currentFrame { get; private set; } = 1;
+    public int score { get; private set; }
+    public bool hadSpareLastFrame { get; private set; }
+    public bool hadStrikeLastFrame { get; private set; }
+    
+    private bool frameStart = true;
+    private int currentDownedPins;
+    private int frameScore;
+    private bool hadDoubleStrike;
+    private bool isBonusRoll;
 
     public void Roll(int pins)
     {
         if (PlayerTripleStrikedOnTenthFrame()) return;
 
-        if (_currentFrame > 10 && !_isBonusRoll) return;
+        if (currentFrame > 10 && !isBonusRoll) return;
 
-        _currentDownedPins = pins;
-        _frameScore += _currentDownedPins;
-        _score += _currentDownedPins;
+        currentDownedPins = pins;
+        frameScore += currentDownedPins;
+        score += currentDownedPins;
 
-        if (_frameStart)
+        if (frameStart)
             HandleFirstHalfFrame();
         else
             HandleSecondHalfFrame();
 
         if (PlayerRolledLastBonusStrikeRoll())
-            _score += _currentDownedPins;
+            score += currentDownedPins;
 
-        _frameStart = !_frameStart;
+        frameStart = !frameStart;
     }
 
     private void HandleFirstHalfFrame()
     {
-        if (_hadDoubleStrike)
+        if (hadDoubleStrike)
             HandleDoubleStrikeRoll();
 
         if (PlayerStrikedOnNonTenthFrame())
-            _score += _currentDownedPins;
+            score += currentDownedPins;
 
         if (PlayerSparedOnNonTenthFrame())
         {
-            _score += _currentDownedPins;
-            _hadSpareLastFrame = false;
+            score += currentDownedPins;
+            hadSpareLastFrame = false;
         }
 
-        if (_currentDownedPins == 10)
+        if (currentDownedPins == 10)
             HandleStrikeRoll();
     }
 
     private void HandleSecondHalfFrame()
     {
         if (PlayerStrikedOnNonTenthFrame())
-            _score += _currentDownedPins;
+            score += currentDownedPins;
 
-        if (_frameScore == 10)
+        if (frameScore == 10)
             HandleSpareRoll();
 
-        _currentFrame++;
-        _hadStrikeLastFrame = false;
-        _frameScore = 0;
-    }
-
-    private bool PlayerTripleStrikedOnTenthFrame()
-    {
-        return _currentFrame == 12;
-    }
-
-    private bool PlayerRolledLastBonusStrikeRoll()
-    {
-        return _currentFrame == 12 && _hadStrikeLastFrame;
-    }
-
-    private void HandleDoubleStrikeRoll()
-    {
-        _score += _currentDownedPins;
-        _hadDoubleStrike = false;
-    }
-
-    private bool PlayerStrikedOnNonTenthFrame()
-    {
-        return _hadStrikeLastFrame && !_isBonusRoll;
-    }
-
-    private bool PlayerSparedOnNonTenthFrame()
-    {
-        return _hadSpareLastFrame && !_isBonusRoll;
+        currentFrame++;
+        hadStrikeLastFrame = false;
+        frameScore = 0;
     }
 
     private void HandleStrikeRoll()
     {
-        if (_hadStrikeLastFrame)
-            _hadDoubleStrike = true;
-        if (_currentFrame >= 10)
-            _isBonusRoll = true;
-        _hadStrikeLastFrame = true;
+        if (hadStrikeLastFrame)
+            hadDoubleStrike = true;
+        if (currentFrame >= 10)
+            isBonusRoll = true;
+        hadStrikeLastFrame = true;
 
-        _frameStart = !_frameStart;
-        _currentFrame++;
-        _frameScore = 0;
+        frameStart = !frameStart;
+        currentFrame++;
+        frameScore = 0;
+    }
+
+    private void HandleDoubleStrikeRoll()
+    {
+        score += currentDownedPins;
+        hadDoubleStrike = false;
     }
 
     private void HandleSpareRoll()
     {
-        if (_currentFrame >= 10)
-            _isBonusRoll = true;
-        _hadSpareLastFrame = true;
+        if (currentFrame >= 10)
+            isBonusRoll = true;
+        hadSpareLastFrame = true;
     }
+
+    private bool PlayerTripleStrikedOnTenthFrame() => currentFrame == 12;
+
+    private bool PlayerRolledLastBonusStrikeRoll() => 
+        currentFrame == 12 && hadStrikeLastFrame;
+
+    private bool PlayerStrikedOnNonTenthFrame() => 
+        hadStrikeLastFrame && !isBonusRoll;
+
+    private bool PlayerSparedOnNonTenthFrame() =>
+        hadSpareLastFrame && !isBonusRoll;
 }

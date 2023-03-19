@@ -11,17 +11,17 @@ public class Tests
     public void SetUp() => stack = new MyStack();
 
     [TestCase(ExpectedResult = true)]
-    public bool NewStackIsEmpty() => stack.IsEmpty;
+    public bool NewStackIsEmpty() => stack.isEmpty;
 
     [TestCase(ExpectedResult = 0)]
-    public int NewStackSizeEqualsZero() => stack.Size;
+    public int NewStackSizeEqualsZero() => stack.size;
 
     [Test]
     public void StackIsNotEmptyWhenOneVariablePushed()
     {
         stack.Push(1);
 
-        Assert.IsFalse(stack.IsEmpty);
+        Assert.IsFalse(stack.isEmpty);
     }
 
     [Test]
@@ -29,7 +29,7 @@ public class Tests
     {
         stack.Push(1);
 
-        Assert.AreEqual(1, stack.Size);
+        Assert.AreEqual(1, stack.size);
     }
 
     [Test]
@@ -39,7 +39,7 @@ public class Tests
         stack.Push(2);
         stack.Pop();
 
-        Assert.AreEqual(1, stack.Size);
+        Assert.AreEqual(1, stack.size);
     }
 
     [Test]
@@ -77,7 +77,7 @@ public class Tests
         stack.Push(1);
         stack.Pop();
 
-        Assert.AreEqual(1, stack.Size);
+        Assert.AreEqual(1, stack.size);
     }
 
     [Test]

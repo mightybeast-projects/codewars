@@ -2,12 +2,9 @@ namespace MyStack;
 
 public class MyStack
 {
-    public int Size => size;
-    public bool IsEmpty => isEmpty;
-
-    private bool isEmpty = true;
+    public bool isEmpty { get; private set; } = true;
+    public int size { get; private set; }
     private int[] array;
-    private int size;
     private int lastPushedElement;
 
     public MyStack() => array = new int[10];

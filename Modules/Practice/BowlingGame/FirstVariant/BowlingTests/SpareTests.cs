@@ -16,7 +16,7 @@ public class SpareTests
         game.Roll(5);
         game.Roll(5);
 
-        Assert.AreEqual(true, game.hadSpareFrame);
+        Assert.AreEqual(true, game.hadSpareLastFrame);
     }
 
     [Test]
@@ -28,7 +28,7 @@ public class SpareTests
         game.Roll(0);
         game.Roll(0);
 
-        Assert.AreEqual(false, game.hadSpareFrame);
+        Assert.AreEqual(false, game.hadSpareLastFrame);
     }
 
     [Test]

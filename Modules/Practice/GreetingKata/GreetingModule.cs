@@ -79,16 +79,9 @@ public class GreetingModule
         {
             string name = normalNames[i];
 
-            if (namesSize > 2)
-            {
-                if (i != 0)
-                {
-                    if (i == namesSize - 1)
-                        result.Append(", and ");
-                    else
-                        result.Append(", ");
-                }
-            }
+            if (namesSize > 2 && i != 0)
+                result.Append(i == namesSize - 1 ? ", and " : ", ");
+
             else if (i != 0)
                 result.Append(" and ");
 
