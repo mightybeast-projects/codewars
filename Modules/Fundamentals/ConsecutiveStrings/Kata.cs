@@ -30,7 +30,6 @@ public class Kata
 [TestFixture]
 public class Tests
 {
-    [Test]
     [TestCase(new string[] { }, 2, ExpectedResult = "")]
     [TestCase(new[] { "aaa" }, 2, ExpectedResult = "")]
     [TestCase(new[] { "aaa" }, 0, ExpectedResult = "")]

@@ -19,7 +19,6 @@ public static class Kata
 [TestFixture]
 public class Tests
 {
-    [Test]
     [TestCase(new [] { 10, 0 }, ExpectedResult = 10)]
     [TestCase(new [] { 10, 0 }, new [] { 5, 5 }, ExpectedResult = 10)]
     [TestCase(new[] { 10, 0 }, new[] { 3, 5 }, new[] { 5, 8 },
@@ -33,6 +32,7 @@ public class Tests
         List<int[]> stopsList = new List<int[]>();
         foreach (int[] stop in stops)
             stopsList.Add(stop);
+        
         return Kata.Number(stopsList);
     }
 }

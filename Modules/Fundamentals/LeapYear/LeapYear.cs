@@ -16,7 +16,6 @@ public static class LeapYear
 [TestFixture]
 public class Tests
 {
-    [Test]
     [TestCase(1996, ExpectedResult = true)]
     [TestCase(2000, ExpectedResult = true)]
     [TestCase(1900, ExpectedResult = false)]

@@ -21,7 +21,6 @@ public class Kata
 [TestFixture]
 public class Tests
 {
-    [Test]
     [TestCase("a", ExpectedResult = "A")]
     [TestCase("ab", ExpectedResult = "A-Bb")]
     [TestCase("abc", ExpectedResult = "A-Bb-Ccc")]

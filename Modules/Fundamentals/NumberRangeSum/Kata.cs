@@ -20,7 +20,6 @@ public class Kata
 [TestFixture]
 public class Tests
 {
-    [Test]
     [TestCase(0, 0, ExpectedResult = 0)]
     [TestCase(1, 1, ExpectedResult = 1)]
     [TestCase(0, 1, ExpectedResult = 1)]

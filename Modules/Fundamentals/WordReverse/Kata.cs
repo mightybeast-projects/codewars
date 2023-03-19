@@ -25,9 +25,9 @@ public static class Kata
 [TestFixture]
 public class Tests
 {
-    [TestCase("This", "sihT")]
-    [TestCase("This  is", "sihT  si")]
-    [TestCase("This is an example!", "sihT si na !elpmaxe")]
-    public void WordReverseTest(string input, string result) =>
-        Assert.AreEqual(result, Kata.ReverseWords(input));
+    [TestCase("This", ExpectedResult = "sihT")]
+    [TestCase("This  is", ExpectedResult = "sihT  si")]
+    [TestCase("This is an example!", ExpectedResult = "sihT si na !elpmaxe")]
+    public string WordReverseTest(string input) =>
+        Kata.ReverseWords(input);
 }

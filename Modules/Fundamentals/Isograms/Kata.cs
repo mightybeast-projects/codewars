@@ -8,7 +8,7 @@ public class Kata
     public static bool IsIsogram(string str)
     {
         foreach (char ch in str)
-            if (Regex.Matches(str, ch.ToString(), RegexOptions.IgnoreCase).Count > 1)
+            if (Regex.Matches(str.ToLower(), ch.ToString()).Count > 1)
                 return false;
 
         return true;
@@ -18,7 +18,6 @@ public class Kata
 [TestFixture]
 public class Tests
 {
-    [Test]
     [TestCase("", ExpectedResult = true)]
     [TestCase("a", ExpectedResult = true)]
     [TestCase("aa", ExpectedResult = false)]

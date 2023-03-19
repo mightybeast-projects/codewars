@@ -44,11 +44,10 @@ public class FizzBuzz
 [TestFixture]
 public class Tests
 {
-    [Test]
-    [TestCase("1", 0)]
-    [TestCase("Fizz", 2)]
-    [TestCase("Buzz", 4)]
-    [TestCase("FizzBuzz", 14)]
-    public void TestFizzBuzzElementAtIndex(string element, int index) =>
-        Assert.AreEqual(element, new FizzBuzz().ElementAt(index));
+    [TestCase(0, ExpectedResult = "1")]
+    [TestCase(2, ExpectedResult = "Fizz")]
+    [TestCase(4, ExpectedResult = "Buzz")]
+    [TestCase(14, ExpectedResult = "FizzBuzz")]
+    public string TestFizzBuzzElementAtIndex(int index) =>
+        new FizzBuzz().ElementAt(index);
 }

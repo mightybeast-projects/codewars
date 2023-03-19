@@ -15,7 +15,6 @@ public class Kata
 [TestFixture]
 public class Tests
 {
-    [Test]
     [TestCase(new int[] { 2, 3 }, 5, ExpectedResult = true)]
     [TestCase(new int[] { 100, 40, 34, 57, 29, 72, 57, 88 }, 75, 
         ExpectedResult = true)]

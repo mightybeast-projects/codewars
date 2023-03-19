@@ -10,11 +10,11 @@ public class Tests
     [SetUp]
     public void SetUp() => stack = new MyStack();
 
-    [Test]
-    public void NewStackIsEmpty() => Assert.IsTrue(stack.IsEmpty);
+    [TestCase(ExpectedResult = true)]
+    public bool NewStackIsEmpty() => stack.IsEmpty;
 
-    [Test]
-    public void NewStackSizeEqualsZero() => Assert.AreEqual(0, stack.Size);
+    [TestCase(ExpectedResult = 0)]
+    public int NewStackSizeEqualsZero() => stack.Size;
 
     [Test]
     public void StackIsNotEmptyWhenOneVariablePushed()

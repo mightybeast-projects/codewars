@@ -14,23 +14,18 @@ public class Tests
     [Test]
     public void Initialization() => Assert.IsNotNull(arrayStats);
 
-    [Test]
-    public void GetMinElement() =>
-        Assert.AreEqual(-5, arrayStats.GetMin());
+    [TestCase(ExpectedResult = -5)]
+    public int GetMinElement() => arrayStats.GetMin();
 
-    [Test]
-    public void GetMaxElement() =>
-        Assert.AreEqual(40, arrayStats.GetMax());
+    [TestCase(ExpectedResult = 40)]
+    public int GetMaxElement() => arrayStats.GetMax();
 
-    [Test]
-    public void GetArraySize() =>
-        Assert.AreEqual(5, arrayStats.GetSize());
+    [TestCase(ExpectedResult = 5)]
+    public int GetArraySize() => arrayStats.GetSize();
 
-    [Test]
-    public void GetAverage() =>
-        Assert.AreEqual(8, arrayStats.GetAverage());
+    [TestCase(ExpectedResult = 8)]
+    public int GetAverage() => arrayStats.GetAverage();
 
-    [Test]
-    public void OddOrEven() =>
-        Assert.AreEqual("even", arrayStats.OddOrEvenSum());
+    [TestCase(ExpectedResult = "even")]
+    public string OddOrEven() => arrayStats.OddOrEvenSum();
 }

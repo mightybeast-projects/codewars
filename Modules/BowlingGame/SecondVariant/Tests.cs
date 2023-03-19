@@ -10,9 +10,8 @@ public class Tests
     [SetUp]
     public void SetUp() => game = new BowlingGame();
 
-    [Test]
-    public void ScoreEqualsZeroOnFirstCreate() =>
-        Assert.AreEqual(0, game.Score());
+    [Test(ExpectedResult = 0)]
+    public int ScoreEqualsZeroOnFirstCreate() => game.Score();
 
     [Test]
     public void AfterOneRollScoreEqualsOne()

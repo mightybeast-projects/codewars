@@ -11,10 +11,10 @@ public class GreetingModule
 
     public string Greet(params string[] names)
     {
-        inputNames = names;
-
         if (names == null)
             return "Hello, my friend.";
+
+        inputNames = names;
 
         if (names.Count<string>() == 1)
             return GreetOnePerson(inputNames[0]);

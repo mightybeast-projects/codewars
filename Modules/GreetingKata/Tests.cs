@@ -1,3 +1,4 @@
+using System;
 using NUnit.Framework;
 
 namespace GreetingKata;
@@ -10,18 +11,16 @@ public class Tests
     [SetUp]
     public void SetUp() => module = new GreetingModule();
 
-    [Test]
-    public void NullGreet() =>
-        Assert.AreEqual("Hello, my friend.", module.Greet(null));
+    [Test(ExpectedResult = "Hello, my friend.")]
+    public string TestNullGreet() => module.Greet(null);
 
-    [Test]
-    [TestCase("Hello, Bob.", "Bob")]
-    [TestCase("HELLO BOB!", "BOB")]
-    [TestCase("Hello, Bob and Mike.", "Bob", "Mike")]
-    [TestCase("Hello, Bob, Fred, and Mike.", "Bob", "Fred", "Mike")]
-    [TestCase("Hello, Bob and Mike. AND HELLO FRED!", "Bob", "FRED", "Mike")]
-    [TestCase("Hello, Bob, Fred, and Mike.", "Bob", "Fred, Mike")]
-    [TestCase("Hello, Bob and Fred, Mike.", "Bob", "\"Fred, Mike\"")]
-    public void TestGreetingModule(string result, params string[] names) =>
-        Assert.AreEqual(result, module.Greet(names));
+    [TestCase("Bob", ExpectedResult = "Hello, Bob.")]
+    [TestCase("BOB", ExpectedResult = "HELLO BOB!")]
+    [TestCase("Bob", "Mike", ExpectedResult = "Hello, Bob and Mike.")]
+    [TestCase("Bob", "Fred", "Mike", ExpectedResult = "Hello, Bob, Fred, and Mike.")]
+    [TestCase("Bob", "FRED", "Mike", ExpectedResult = "Hello, Bob and Mike. AND HELLO FRED!")]
+    [TestCase("Bob", "Fred, Mike", ExpectedResult = "Hello, Bob, Fred, and Mike.")]
+    [TestCase("Bob", "\"Fred, Mike\"", ExpectedResult = "Hello, Bob and Fred, Mike.")]
+    public string TestGreetingModule(params string[] names) =>
+        module.Greet(names);
 }
