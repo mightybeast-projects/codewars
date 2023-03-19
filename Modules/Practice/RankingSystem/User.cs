@@ -2,24 +2,24 @@ namespace RankingSystem;
 
 public class User
 {
-    internal int rank = -8;
-    internal int progress;
+    public int rank = -8;
+    public int progress;
 
     private int activityRank;
 
-    public void incProgress(int activityRank)
+    public void incProgress(int currentActivityRank)
     {
-        this.activityRank = activityRank;
+        activityRank = currentActivityRank;
 
         if (RankIsOutOfRange())
             throw new ArgumentException();
 
         if (rank == 8) return;
-        else if (this.activityRank == rank - NegativeZeroRankOffset())
+        else if (activityRank == rank - NegativeZeroRankOffset())
             progress += 1;
-        else if (this.activityRank == rank)
+        else if (activityRank == rank)
             progress += 3;
-        else if (this.activityRank > rank)
+        else if (activityRank > rank)
             CalculateAndApplyProgress();
     }
 

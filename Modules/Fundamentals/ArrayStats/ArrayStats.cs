@@ -6,6 +6,12 @@ public class ArrayStats
 
     public ArrayStats(int[] array) => this.array = array;
 
+    public string OddOrEvenSum() => GetSum() % 2 == 0 ? "even" : "odd";
+
+    public int GetSize() => array.Count();
+
+    public int GetAverage() => GetSum() / array.Count();
+
     public int GetMin()
     {
         int minElement = array[0];
@@ -27,18 +33,6 @@ public class ArrayStats
 
         return maxElement;
     }
-
-    public string OddOrEvenSum()
-    {
-        if (GetSum() % 2 == 0)
-            return "even";
-        else
-            return "odd";
-    }
-
-    public int GetSize() => array.Count();
-
-    public int GetAverage() => GetSum() / array.Count();
 
     private int GetSum()
     {

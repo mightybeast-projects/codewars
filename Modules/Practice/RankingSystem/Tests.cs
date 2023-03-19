@@ -17,13 +17,11 @@ public class Tests
         Assert.AreEqual(0, user.progress);
     }
 
-    [Test]
-    public void OutOfRangeRank()
-    {
-        Assert.Throws<ArgumentException>(() => user.incProgress(-9));
-        Assert.Throws<ArgumentException>(() => user.incProgress(0));
-        Assert.Throws<ArgumentException>(() => user.incProgress(9));
-    }
+    [TestCase(-9)]
+    [TestCase(0)]
+    [TestCase(9)]
+    public void TestOutOfRangeRank(int rank) =>
+        Assert.Throws<ArgumentException>(() => user.incProgress(rank));
 
     [Test]
     public void SameRankProgressIncrease()

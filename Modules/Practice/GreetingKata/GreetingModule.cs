@@ -9,21 +9,19 @@ public class GreetingModule
     private List<string> shoutedNames;
     private StringBuilder result;
 
-    public string Greet(params string[] names)
+    public string Greet(string[] names)
     {
         if (names == null)
             return "Hello, my friend.";
 
         inputNames = names;
 
-        if (names.Count<string>() == 1)
-            return GreetOnePerson(inputNames[0]);
-        else
-            return GreetSeveralPeople();
+        return names.Length == 1 ? GreetOnePerson() : GreetSeveralPeople();
     }
 
-    private string GreetOnePerson(string name)
+    private string GreetOnePerson()
     {
+        string name = inputNames[0];
         if (name.ToUpper() == name) return "HELLO " + name + "!";
 
         return "Hello, " + name + ".";
