@@ -16,9 +16,17 @@ public static class LeapYear
 [TestFixture]
 public class Tests
 {
-    [TestCase(1996, ExpectedResult = true)]
-    [TestCase(2000, ExpectedResult = true)]
-    [TestCase(1900, ExpectedResult = false)]
-    [TestCase(2001, ExpectedResult = false)]
+    [Test, TestCaseSource(nameof(cases))]
     public bool TestLeapYear(int year) => LeapYear.IsLeap(year);
+
+    private static IEnumerable<TestCaseData> cases
+    {
+        get
+        {
+            yield return new TestCaseData(1996).Returns(true);
+            yield return new TestCaseData(2000).Returns(true);
+            yield return new TestCaseData(1900).Returns(false);
+            yield return new TestCaseData(2001).Returns(false);
+        }
+    }
 }

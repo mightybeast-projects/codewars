@@ -44,10 +44,18 @@ public class FizzBuzz
 [TestFixture]
 public class Tests
 {
-    [TestCase(0, ExpectedResult = "1")]
-    [TestCase(2, ExpectedResult = "Fizz")]
-    [TestCase(4, ExpectedResult = "Buzz")]
-    [TestCase(14, ExpectedResult = "FizzBuzz")]
+    [Test, TestCaseSource(nameof(cases))]
     public string TestFizzBuzzElementAtIndex(int index) =>
         new FizzBuzz().ElementAt(index);
+
+    private static IEnumerable<TestCaseData> cases
+    {
+        get
+        {
+            yield return new TestCaseData(0).Returns("1");
+            yield return new TestCaseData(2).Returns("Fizz");
+            yield return new TestCaseData(4).Returns("Buzz");
+            yield return new TestCaseData(14).Returns("FizzBuzz");
+        }
+    }
 }

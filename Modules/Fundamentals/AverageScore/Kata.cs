@@ -15,11 +15,23 @@ public class Kata
 [TestFixture]
 public class Tests
 {
-    [TestCase(new int[] { 2, 3 }, 5, ExpectedResult = true)]
-    [TestCase(new int[] { 100, 40, 34, 57, 29, 72, 57, 88 }, 75, 
-        ExpectedResult = true)]
-    [TestCase(new int[] { 12, 23, 34, 45, 56, 67, 78, 89, 90 }, 69, 
-        ExpectedResult = true)]
+    [Test, TestCaseSource(nameof(cases))]
     public bool TestAverageScore(int[] classPoints, int yourPoints) =>
-        Kata.BetterThanAverage(new int[] { 2, 3 }, 5);
+        Kata.BetterThanAverage(classPoints, yourPoints);
+
+    private static IEnumerable<TestCaseData> cases
+    {
+        get
+        {
+            yield return new TestCaseData(
+                new int[] { 2, 3 }, 5)
+                .Returns(true);
+            yield return new TestCaseData(
+                new int[] { 100, 40, 34, 57, 29, 72, 57, 88 }, 75)
+                .Returns(true);
+            yield return new TestCaseData(
+                new int[] { 12, 23, 34, 45, 56, 67, 78, 89, 90 }, 69)
+                .Returns(true);
+        }
+    }
 }
