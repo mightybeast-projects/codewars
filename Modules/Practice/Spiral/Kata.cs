@@ -6,33 +6,41 @@ public class Kata
     {
         int[,] spiral = new int[size, size];
 
-        for (int i = 0; i < size; i++)
-        {
-            spiral[0, i] = 1;
-            spiral[i, size - 1] = 1;
-            spiral[size - 1, i] = 1;
-        }
+        int left = 0;
+        int top = 0;
+        int bottom = size;
+        int right = size;
 
-        for (int i = 2; i < size; i++)
-                spiral[i, 0] = 1;
-        
-        for (int i = 1; i < size - 2; i++)
-                spiral[2, i] = 1;
-                
-        for (int i = 3; i < size - 2; i++)
-                spiral[i, size - 3] = 1;
-
-        if (size == 7)
+        while(true)
         {
-            for (int i = 2; i < size - 3; i++)
-                spiral[size - 3, i] = 1;
-        }
-        else if (size == 8)
-        {
-            for (int i = 2; i < size - 3; i++)
-                spiral[size - 3, i] = 1;
+            for (int i = left; i < right; i++)
+            {
+                if (i == left && i > 1)
+                    spiral[top, left - 1] = 1;
+                spiral[top, i] = 1;
+            }
 
-            spiral[4, 2] = 1;
+            if (++top > bottom) break;
+
+            for (int i = top; i < bottom; i++)
+                spiral[i, right - 1] = 1;
+
+            if (left > --right) break;
+
+            for (int i = right; i > left; i--)
+                spiral[bottom - 1, i] = 1;
+
+            if (top > --bottom) break;
+
+            for (int i = bottom; i > top; i--)
+                spiral[i, left] = 1;
+
+            if (++left > right) break;
+
+            top++;
+            right--;
+            bottom--;
+            left++;
         }
 
         return spiral;
