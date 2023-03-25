@@ -14,6 +14,7 @@ public class Tests
 
     private static TestCaseData[] encodingCases =
     {
+        new TestCaseData("").Returns(new Tuple<string, int>("", 0)),
         new TestCaseData("a").Returns(new Tuple<string, int>("a", 0)),
         new TestCaseData("aa").Returns(new Tuple<string, int>("aa", 0)),
         new TestCaseData("ab").Returns(new Tuple<string, int>("ba", 0)),
@@ -32,6 +33,7 @@ public class Tests
 
     private static TestCaseData[] decodingCases =
     {
+        new TestCaseData("", 0).Returns(""),
         new TestCaseData("a", 0).Returns("a"),
         new TestCaseData("aa", 0).Returns("aa"),
         new TestCaseData("ba", 0).Returns("ab"),
