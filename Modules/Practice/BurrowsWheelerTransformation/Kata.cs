@@ -19,8 +19,7 @@ public class Kata
         
         strMatrix.Sort(StringComparer.Ordinal);
 
-        foreach (string str in strMatrix)
-            System.Console.WriteLine(str);
+        PrintMatrix(strMatrix);
 
         index = strMatrix.IndexOf(s);
         encodedStr = "";
@@ -33,19 +32,27 @@ public class Kata
         return result;
     }
 
-    public static string Decode(string s, int i)
+    public static string Decode(string s, int n)
     {
-        return null;
-    }
-}
+        if (s.Length == 1) return s;
 
-public class CaseSensitiveStringComparer : IComparer<string>
-{
-    public int Compare(string x, string y)
+        string result = s;
+        List<string> strMatrix = Enumerable.Repeat("", s.Length).ToList();
+
+        for (int i = 0; i < s.Length; i++)
+        {
+            for (int j = 0; j < s.Length; j++)
+                strMatrix[j] = s[j].ToString() + strMatrix[j];
+
+            strMatrix.Sort(StringComparer.Ordinal);
+        }
+
+        return strMatrix[n];
+    }
+
+    private static void PrintMatrix(List<string> strMatrix)
     {
-        if (char.IsUpper(x[0]) && char.IsUpper(y[0])) return x.CompareTo(y);
-        if (char.IsUpper(x[0])) return -1;
-        if (char.IsUpper(y[0])) return 1;
-        return x.CompareTo(y);
+        foreach (string str in strMatrix)
+            System.Console.WriteLine(str);
     }
 }
