@@ -18,6 +18,12 @@ public class Tests
         new TestCaseData("banana")
             .Returns(new Tuple<string, int>("nnbaaa", 3)),
         new TestCaseData("bananabar")
-            .Returns(new Tuple<string, int>("nnbbraaaa", 4))
+            .Returns(new Tuple<string, int>("nnbbraaaa", 4)),
+        new TestCaseData("Banana")
+            .Returns(new Tuple<string, int>("annBaa", 0)),
+        new TestCaseData("Humble Bundle")
+            .Returns(new Tuple<string, int>("e emnllbduuHB", 2)),
+        new TestCaseData("Mellow Yellow")
+            .Returns(new Tuple<string, int>("ww MYeelllloo", 1))
     };
 }

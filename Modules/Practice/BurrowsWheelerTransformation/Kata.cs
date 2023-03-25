@@ -16,11 +16,11 @@ public class Kata
         
         for (int i = 0; i < s.Length; i++)
             strMatrix.Add(s[^i..] + s.Substring(0, s.Length - i));
+        
+        strMatrix.Sort(StringComparer.Ordinal);
 
         foreach (string str in strMatrix)
             System.Console.WriteLine(str);
-        
-        strMatrix.Sort();
 
         index = strMatrix.IndexOf(s);
         encodedStr = "";
@@ -36,5 +36,16 @@ public class Kata
     public static string Decode(string s, int i)
     {
         return null;
+    }
+}
+
+public class CaseSensitiveStringComparer : IComparer<string>
+{
+    public int Compare(string x, string y)
+    {
+        if (char.IsUpper(x[0]) && char.IsUpper(y[0])) return x.CompareTo(y);
+        if (char.IsUpper(x[0])) return -1;
+        if (char.IsUpper(y[0])) return 1;
+        return x.CompareTo(y);
     }
 }
