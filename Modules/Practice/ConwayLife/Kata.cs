@@ -22,8 +22,9 @@ public class Kata
 
     private static void InitializeUniverse()
     {
-        universe =
-            new int[original.GetLength(0) + 2, original.GetLength(1) + 2];
+        int width = original.GetLength(0) + 2;
+        int height = original.GetLength(1) + 2;
+        universe = new int[width, height];
 
         for (int i = 1; i < original.GetLength(0) + 1; i++)
             for (int j = 1; j < original.GetLength(1) + 1; j++)
@@ -108,15 +109,13 @@ public class Kata
     private static int GetNeighboursCount(int k, int l)
     {
         int count = 0;
-        for (int i = k - 1; i < k + 2; i++)
-        {
-            for (int j = l - 1; j < l + 2; j++)
-            {
-                if (i == k && j == l) continue;
-                try { if (original[i, j] == 1) count++; }
-                catch (Exception) { continue; }
-            }
-        }
+        int maxRows = Math.Min(k + 2, original.GetLength(0));
+        int maxCols = Math.Min(l + 2, original.GetLength(1));
+
+        for (int i = Math.Max(k - 1, 0); i < maxRows; i++)
+            for (int j = Math.Max(l - 1, 0); j < maxCols; j++)
+                if ((i != k || j != l) && original[i, j] == 1)
+                    count++;
 
         return count;
     }
