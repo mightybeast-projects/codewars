@@ -11,20 +11,35 @@ public class Test
 
     private static TestCaseData[] cases =
     {
-        new TestCaseData(new int[,] { }, 1).Returns(new int[,] { }),
+        new TestCaseData(new int[,] { }, 1)
+            .Returns(new int[,] { })
+            .SetName("0x0, 1"),
         new TestCaseData(new int[,] {
                 { 1, 1 },
                 { 1, 1 } }, 1)
             .Returns(new int[,] {
                 { 1, 1 },
                 { 1, 1 }
-            })/*,
+            })
+            .SetName("2x2, 1"),
         new TestCaseData(new int[,] {
             { 1, 1, 1 } }, 1)
             .Returns(new int[,] {
                 { 1 },
                 { 1 },
                 { 1 }
-            }),*/
+            })
+            .SetName("3x1, 1"),
+        new TestCaseData(new int[,] {
+                { 1 },
+                { 1 },
+                { 1 } }, 1)
+            .Returns(new int[,] {
+                { 1, 1, 1 }
+            })
+            .SetName("1x3, 1"),
+        new TestCaseData(new int[,] { { 1, 1, 1 } }, 2)
+            .Returns(new int[,] { { 1, 1, 1 } })
+            .SetName("3x1, 2")
     };
 }
