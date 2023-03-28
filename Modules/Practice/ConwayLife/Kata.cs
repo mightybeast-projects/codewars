@@ -2,45 +2,40 @@ namespace codewars.Modules.Practice.ConwayLife;
 
 public class Kata
 {
+    private static int[,] original;
     private static int[,] matrix;
     private static bool endRowDeletion;
     private static bool endColDeletion;
 
     public static int[,] GetGeneration(int[,] cells, int generation)
     {
-        if (cells.GetLength(0) == 0) return cells;
+        if (cells.GetLength(0) == 0 || generation == 0) return cells;
 
-        int[,] original = cells;
+        original = cells;
 
         for (int i = 0; i < generation; i++)
-        {
-            matrix = new int[original.GetLength(0) + 2, original.GetLength(1) + 2];
-
-            //PrintMatrix(matrix);
-
-            WrapMatrix(original);
-
-            //PrintMatrix(matrix);
-
-            ApplyGameRules();
-
-            //PrintMatrix(matrix);
-
-            DeleteEmptyRowsAndCols();
-
-            //PrintMatrix(matrix);
-
-            original = matrix;
-        }
+            HandleGeneration();
 
         return matrix;
     }
 
-    private static void WrapMatrix(int[,] cells)
+    private static void HandleGeneration()
     {
-        for (int i = 1; i < cells.GetLength(0) + 1; i++)
-            for (int j = 1; j < cells.GetLength(1) + 1; j++)
-                matrix[i, j] = cells[i - 1, j - 1];
+        matrix =
+            new int[original.GetLength(0) + 2, original.GetLength(1) + 2];
+
+        WrapMatrix();
+        ApplyGameRules();
+        DeleteEmptyRowsAndCols();
+
+        original = matrix;
+    }
+
+    private static void WrapMatrix()
+    {
+        for (int i = 1; i < original.GetLength(0) + 1; i++)
+            for (int j = 1; j < original.GetLength(1) + 1; j++)
+                matrix[i, j] = original[i - 1, j - 1];
     }
 
     private static void ApplyGameRules()
@@ -77,10 +72,10 @@ public class Kata
         }
 
         endRowDeletion = false;
-        
+
         for (int i = matrix.GetLength(0) - 1; i >= 0; i--)
             HandleRowDeletion(i);
-        
+
         endRowDeletion = false;
 
         for (int j = 0; j < matrix.GetLength(1); j++)
@@ -93,7 +88,7 @@ public class Kata
 
         for (int j = matrix.GetLength(1) - 1; j >= 0; j--)
             HandleColDeletion(j);
-        
+
         endColDeletion = false;
     }
 
@@ -187,7 +182,7 @@ public class Kata
         return true;
     }
 
-    private static void PrintMatrix(int[,] matrix)
+    private static void PrintMatrix()
     {
         for (int i = 0; i < matrix.GetLength(0); i++)
         {
