@@ -4,8 +4,8 @@ public class Kata
 {
     private static int[,] original;
     private static int[,] universe;
-    private static bool endRowDeletion;
-    private static bool endColDeletion;
+    private static bool endDeletion;
+    private static bool offset;
 
     public static int[,] GetGeneration(int[,] cells, int generation)
     {
@@ -60,49 +60,49 @@ public class Kata
 
     private static void TrimUniverse()
     {
-        endRowDeletion = false;
-
         for (int i = 0; i < universe.GetLength(0); i++)
         {
             HandleRowDeletion(i);
-            if (!endRowDeletion) i--;
+            if (!endDeletion) i--;
         }
 
-        endRowDeletion = false;
+        endDeletion = false;
 
         for (int i = universe.GetLength(0) - 1; i >= 0; i--)
             HandleRowDeletion(i);
 
-        endColDeletion = false;
+        endDeletion = false;
 
         for (int j = 0; j < universe.GetLength(1); j++)
         {
             HandleColDeletion(j);
-            if (!endColDeletion) j--;
+            if (!endDeletion) j--;
         }
 
-        endColDeletion = false;
+        endDeletion = false;
 
         for (int j = universe.GetLength(1) - 1; j >= 0; j--)
             HandleColDeletion(j);
+
+        endDeletion = false;
     }
 
     private static void HandleRowDeletion(int i)
     {
-        if (endRowDeletion) return;
+        if (endDeletion) return;
 
         if (UniverseRowIsEmpty(i))
             DeleteRow(i);
-        else endRowDeletion = true;
+        else endDeletion = true;
     }
 
     private static void HandleColDeletion(int j)
     {
-        if (endColDeletion) return;
+        if (endDeletion) return;
 
         if (UniverseColIsEmpty(j))
             DeleteCol(j);
-        else endColDeletion = true;
+        else endDeletion = true;
     }
 
     private static int GetNeighboursCount(int k, int l)
@@ -124,43 +124,31 @@ public class Kata
     private static void DeleteRow(int index)
     {
         original = universe;
-        universe = new int[original.GetLength(0) - 1, original.GetLength(1)];
-        bool rowOffset = false;
+        universe =
+            new int[original.GetLength(0) - 1, original.GetLength(1)];
+        offset = false;
 
         for (int i = 0; i < original.GetLength(0); i++)
-        {
-            if (i == index)
-            {
-                rowOffset = true;
-                continue;
-            }
-
-            for (int j = 0; j < original.GetLength(1); j++)
-                universe[i - Convert.ToInt32(rowOffset), j] = original[i, j];
-        }
+            if (i != index)
+                for (int j = 0; j < original.GetLength(1); j++)
+                    universe[i - Convert.ToInt32(offset), j] = original[i, j];
+            else
+                offset = true;
     }
 
     private static void DeleteCol(int index)
     {
         original = universe;
-        universe = new int[original.GetLength(0), original.GetLength(1) - 1];
-        bool colOffset = false;
+        universe =
+            new int[original.GetLength(0), original.GetLength(1) - 1];
+        offset = false;
 
-        for (int i = 0; i < original.GetLength(0); i++)
-        {
+        for (int i = 0; i < original.GetLength(0); i++, offset = false)
             for (int j = 0; j < original.GetLength(1); j++)
-            {
                 if (j == index)
-                {
-                    colOffset = true;
-                    continue;
-                }
-
-                universe[i, j - Convert.ToInt32(colOffset)] = original[i, j];
-            }
-
-            colOffset = false;
-        }
+                    offset = true;
+                else
+                    universe[i, j - Convert.ToInt32(offset)] = original[i, j];
     }
 
     private static bool UniverseRowIsEmpty(int i)
