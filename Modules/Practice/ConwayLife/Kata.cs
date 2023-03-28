@@ -3,7 +3,7 @@ namespace codewars.Modules.Practice.ConwayLife;
 public class Kata
 {
     private static int[,] original;
-    private static int[,] matrix;
+    private static int[,] universe;
     private static bool endRowDeletion;
     private static bool endColDeletion;
 
@@ -13,65 +13,56 @@ public class Kata
 
         original = cells;
 
-        for (int i = 0; i < generation; i++)
-            HandleGeneration();
+        InitializeUniverse();
+        StepGeneration();
+        TrimUniverse();
 
-        return matrix;
+        return GetGeneration(universe, generation - 1);
     }
 
-    private static void HandleGeneration()
+    private static void InitializeUniverse()
     {
-        InitializeAndWrapMatrix();
-        ApplyGameRules();
-        TrimMatrix();
-
-        original = matrix;
-    }
-
-    private static void InitializeAndWrapMatrix()
-    {
-        matrix =
+        universe =
             new int[original.GetLength(0) + 2, original.GetLength(1) + 2];
 
         for (int i = 1; i < original.GetLength(0) + 1; i++)
             for (int j = 1; j < original.GetLength(1) + 1; j++)
-                matrix[i, j] = original[i - 1, j - 1];
+                universe[i, j] = original[i - 1, j - 1];
     }
 
-    private static void ApplyGameRules()
+    private static void StepGeneration()
     {
-        original = matrix;
-        matrix = new int[original.GetLength(0), original.GetLength(1)];
+        original = universe;
+        universe = new int[original.GetLength(0), original.GetLength(1)];
 
-        for (int i = 0; i < matrix.GetLength(0); i++)
-            for (int j = 0; j < matrix.GetLength(1); j++)
-                HandleMatrixCell(i, j);
+        for (int i = 0; i < universe.GetLength(0); i++)
+            for (int j = 0; j < universe.GetLength(1); j++)
+                HandleCell(i, j);
     }
 
-    private static void HandleMatrixCell(int i, int j)
+    private static void HandleCell(int i, int j)
     {
-        int cell = original[i, j];
         int neighboursCount = GetNeighboursCount(i, j);
 
-        if (cell == 1)
+        if (original[i, j] == 1)
             HandleAliveCell(i, j, neighboursCount);
-        else if (neighboursCount == 3) matrix[i, j] = 1;
-        else matrix[i, j] = 0;
+        else if (neighboursCount == 3) universe[i, j] = 1;
+        else universe[i, j] = 0;
     }
 
-    private static void HandleAliveCell(int i, int j, int veighboursCount)
+    private static void HandleAliveCell(int i, int j, int neighboursCount)
     {
-        if (veighboursCount < 2 || veighboursCount > 3)
-            matrix[i, j] = 0;
-        else if (veighboursCount == 2 || veighboursCount == 3)
-            matrix[i, j] = 1;
+        if (neighboursCount < 2 || neighboursCount > 3)
+            universe[i, j] = 0;
+        else if (neighboursCount == 2 || neighboursCount == 3)
+            universe[i, j] = 1;
     }
 
-    private static void TrimMatrix()
+    private static void TrimUniverse()
     {
         endRowDeletion = false;
 
-        for (int i = 0; i < matrix.GetLength(0); i++)
+        for (int i = 0; i < universe.GetLength(0); i++)
         {
             HandleRowDeletion(i);
             if (!endRowDeletion) i--;
@@ -79,12 +70,12 @@ public class Kata
 
         endRowDeletion = false;
 
-        for (int i = matrix.GetLength(0) - 1; i >= 0; i--)
+        for (int i = universe.GetLength(0) - 1; i >= 0; i--)
             HandleRowDeletion(i);
 
         endColDeletion = false;
 
-        for (int j = 0; j < matrix.GetLength(1); j++)
+        for (int j = 0; j < universe.GetLength(1); j++)
         {
             HandleColDeletion(j);
             if (!endColDeletion) j--;
@@ -92,7 +83,7 @@ public class Kata
 
         endColDeletion = false;
 
-        for (int j = matrix.GetLength(1) - 1; j >= 0; j--)
+        for (int j = universe.GetLength(1) - 1; j >= 0; j--)
             HandleColDeletion(j);
     }
 
@@ -100,7 +91,7 @@ public class Kata
     {
         if (endRowDeletion) return;
 
-        if (MatrixRowIsEmpty(i))
+        if (UniverseRowIsEmpty(i))
             DeleteRow(i);
         else endRowDeletion = true;
     }
@@ -109,7 +100,7 @@ public class Kata
     {
         if (endColDeletion) return;
 
-        if (MatrixColIsEmpty(j))
+        if (UniverseColIsEmpty(j))
             DeleteCol(j);
         else endColDeletion = true;
     }
@@ -132,8 +123,8 @@ public class Kata
 
     private static void DeleteRow(int index)
     {
-        int[,] original = matrix;
-        matrix = new int[original.GetLength(0) - 1, original.GetLength(1)];
+        original = universe;
+        universe = new int[original.GetLength(0) - 1, original.GetLength(1)];
         bool rowOffset = false;
 
         for (int i = 0; i < original.GetLength(0); i++)
@@ -145,14 +136,14 @@ public class Kata
             }
 
             for (int j = 0; j < original.GetLength(1); j++)
-                matrix[i - Convert.ToInt32(rowOffset), j] = original[i, j];
+                universe[i - Convert.ToInt32(rowOffset), j] = original[i, j];
         }
     }
 
     private static void DeleteCol(int index)
     {
-        int[,] original = matrix;
-        matrix = new int[original.GetLength(0), original.GetLength(1) - 1];
+        original = universe;
+        universe = new int[original.GetLength(0), original.GetLength(1) - 1];
         bool colOffset = false;
 
         for (int i = 0; i < original.GetLength(0); i++)
@@ -165,24 +156,24 @@ public class Kata
                     continue;
                 }
 
-                matrix[i, j - Convert.ToInt32(colOffset)] = original[i, j];
+                universe[i, j - Convert.ToInt32(colOffset)] = original[i, j];
             }
 
             colOffset = false;
         }
     }
 
-    private static bool MatrixRowIsEmpty(int i)
+    private static bool UniverseRowIsEmpty(int i)
     {
-        for (int j = 0; j < matrix.GetLength(1); j++)
-            if (matrix[i, j] == 1) return false;
+        for (int j = 0; j < universe.GetLength(1); j++)
+            if (universe[i, j] == 1) return false;
         return true;
     }
 
-    private static bool MatrixColIsEmpty(int j)
+    private static bool UniverseColIsEmpty(int j)
     {
-        for (int i = 0; i < matrix.GetLength(0); i++)
-            if (matrix[i, j] == 1) return false;
+        for (int i = 0; i < universe.GetLength(0); i++)
+            if (universe[i, j] == 1) return false;
         return true;
     }
 }
