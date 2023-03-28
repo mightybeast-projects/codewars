@@ -69,16 +69,16 @@ public class Kata
 
         endDeletion = false;
 
-        for (int i = universe.GetLength(0) - 1; i >= 0; i--)
-            HandleRowDeletion(i);
-
-        endDeletion = false;
-
         for (int j = 0; j < universe.GetLength(1); j++)
         {
             HandleColDeletion(j);
             if (!endDeletion) j--;
         }
+
+        endDeletion = false;
+
+        for (int i = universe.GetLength(0) - 1; i >= 0; i--)
+            HandleRowDeletion(i);
 
         endDeletion = false;
 
@@ -123,9 +123,9 @@ public class Kata
     private static void DeleteRow(int index)
     {
         original = universe;
+        offset = false;
         universe =
             new int[original.GetLength(0) - 1, original.GetLength(1)];
-        offset = false;
 
         for (int i = 0; i < original.GetLength(0); i++)
             if (i != index)
@@ -138,9 +138,9 @@ public class Kata
     private static void DeleteCol(int index)
     {
         original = universe;
+        offset = false;
         universe =
             new int[original.GetLength(0), original.GetLength(1) - 1];
-        offset = false;
 
         for (int i = 0; i < original.GetLength(0); i++, offset = false)
             for (int j = 0; j < original.GetLength(1); j++)

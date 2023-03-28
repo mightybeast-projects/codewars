@@ -14,6 +14,7 @@ public class Test
         new TestCaseData(new int[,] { }, 1)
             .Returns(new int[,] { })
             .SetName("0x0, 1"),
+
         new TestCaseData(new int[,] {
                 { 1, 1 },
                 { 1, 1 } }, 0)
@@ -22,6 +23,7 @@ public class Test
                 { 1, 1 }
             })
             .SetName("2x2, 0"),
+
         new TestCaseData(new int[,] {
                 { 1, 1 },
                 { 1, 1 } }, 1)
@@ -30,6 +32,7 @@ public class Test
                 { 1, 1 }
             })
             .SetName("2x2, 1"),
+
         new TestCaseData(new int[,] {
             { 1, 1, 1 } }, 1)
             .Returns(new int[,] {
@@ -38,6 +41,7 @@ public class Test
                 { 1 }
             })
             .SetName("3x1, 1"),
+
         new TestCaseData(new int[,] {
                 { 1 },
                 { 1 },
@@ -46,9 +50,11 @@ public class Test
                 { 1, 1, 1 }
             })
             .SetName("1x3, 1"),
+
         new TestCaseData(new int[,] { { 1, 1, 1 } }, 2)
             .Returns(new int[,] { { 1, 1, 1 } })
             .SetName("3x1, 2"),
+
         new TestCaseData(new int[,] {
                 { 1, 0, 0 },
                 { 0, 1, 1 },
@@ -59,6 +65,7 @@ public class Test
                 { 1, 1, 1 }
             })
             .SetName("3x3, 1"),
+            
         new TestCaseData(new int[,] {
                 { 1, 0, 0 },
                 { 0, 1, 1 },
