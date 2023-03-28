@@ -4,7 +4,6 @@ public class Kata
 {
     private static int[,] original;
     private static int[,] universe;
-    private static bool offset;
 
     public static int[,] GetGeneration(int[,] cells, int generation)
     {
@@ -14,7 +13,7 @@ public class Kata
 
         InitializeUniverse();
         StepGeneration();
-        TrimUniverse();
+        universe = new Trimmer(universe).TrimUniverse();
 
         return GetGeneration(universe, generation - 1);
     }
@@ -71,14 +70,25 @@ public class Kata
         else if (neighboursCount == 2 || neighboursCount == 3)
             universe[i, j] = 1;
     }
+}
 
-    private static void TrimUniverse()
+public class Trimmer
+{
+    private int[,] original;
+    private int[,] universe;
+    private bool offset;
+
+    public Trimmer(int[,] universe) => this.universe = universe;
+
+    public int[,] TrimUniverse()
     {
         TrimRows();
         TrimCols();
+
+        return universe;
     }
 
-    private static void TrimRows()
+    private void TrimRows()
     {
         while (UniverseRowIsEmpty(0))
             DeleteUniverseRow(0);
@@ -86,7 +96,7 @@ public class Kata
             DeleteUniverseRow(universe.GetLength(0) - 1);
     }
 
-    private static void TrimCols()
+    private void TrimCols()
     {
         while (UniverseColIsEmpty(0))
             DeleteUniverseCol(0);
@@ -94,7 +104,7 @@ public class Kata
             DeleteUniverseCol(universe.GetLength(1) - 1);
     }
 
-    private static void DeleteUniverseRow(int index)
+    private void DeleteUniverseRow(int index)
     {
         original = universe;
         offset = false;
@@ -109,7 +119,7 @@ public class Kata
                 offset = true;
     }
 
-    private static void DeleteUniverseCol(int index)
+    private void DeleteUniverseCol(int index)
     {
         original = universe;
         offset = false;
@@ -124,14 +134,14 @@ public class Kata
                     universe[i, j - Convert.ToInt32(offset)] = original[i, j];
     }
 
-    private static bool UniverseRowIsEmpty(int i)
+    private bool UniverseRowIsEmpty(int i)
     {
         for (int j = 0; j < universe.GetLength(1); j++)
             if (universe[i, j] == 1) return false;
         return true;
     }
 
-    private static bool UniverseColIsEmpty(int j)
+    private bool UniverseColIsEmpty(int j)
     {
         for (int i = 0; i < universe.GetLength(0); i++)
             if (universe[i, j] == 1) return false;
