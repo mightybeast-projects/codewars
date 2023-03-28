@@ -9,7 +9,7 @@ public class Kata
 
     public static int[,] GetGeneration(int[,] cells, int generation)
     {
-        if (cells.GetLength(0) == 0 || generation == 0) return cells;
+        if (generation == 0) return cells;
 
         original = cells;
 
@@ -21,18 +21,18 @@ public class Kata
 
     private static void HandleGeneration()
     {
-        matrix =
-            new int[original.GetLength(0) + 2, original.GetLength(1) + 2];
-
-        WrapMatrix();
+        InitializeAndWrapMatrix();
         ApplyGameRules();
-        DeleteEmptyRowsAndCols();
+        TrimMatrix();
 
         original = matrix;
     }
 
-    private static void WrapMatrix()
+    private static void InitializeAndWrapMatrix()
     {
+        matrix =
+            new int[original.GetLength(0) + 2, original.GetLength(1) + 2];
+
         for (int i = 1; i < original.GetLength(0) + 1; i++)
             for (int j = 1; j < original.GetLength(1) + 1; j++)
                 matrix[i, j] = original[i - 1, j - 1];
@@ -40,31 +40,37 @@ public class Kata
 
     private static void ApplyGameRules()
     {
-        int[,] original = matrix;
+        original = matrix;
         matrix = new int[original.GetLength(0), original.GetLength(1)];
 
         for (int i = 0; i < matrix.GetLength(0); i++)
-        {
             for (int j = 0; j < matrix.GetLength(1); j++)
-            {
-                int cell = original[i, j];
-                int cellNeighbours = GetNeighboursCount(original, i, j);
-
-                if (cell == 1)
-                {
-                    if (cellNeighbours < 2 || cellNeighbours > 3)
-                        matrix[i, j] = 0;
-                    else if (cellNeighbours == 2 || cellNeighbours == 3)
-                        matrix[i, j] = 1;
-                }
-                else if (cellNeighbours == 3) matrix[i, j] = 1;
-                else matrix[i, j] = 0;
-            }
-        }
+                HandleMatrixCell(i, j);
     }
 
-    private static void DeleteEmptyRowsAndCols()
+    private static void HandleMatrixCell(int i, int j)
     {
+        int cell = original[i, j];
+        int neighboursCount = GetNeighboursCount(i, j);
+
+        if (cell == 1)
+            HandleAliveCell(i, j, neighboursCount);
+        else if (neighboursCount == 3) matrix[i, j] = 1;
+        else matrix[i, j] = 0;
+    }
+
+    private static void HandleAliveCell(int i, int j, int veighboursCount)
+    {
+        if (veighboursCount < 2 || veighboursCount > 3)
+            matrix[i, j] = 0;
+        else if (veighboursCount == 2 || veighboursCount == 3)
+            matrix[i, j] = 1;
+    }
+
+    private static void TrimMatrix()
+    {
+        endRowDeletion = false;
+
         for (int i = 0; i < matrix.GetLength(0); i++)
         {
             HandleRowDeletion(i);
@@ -76,7 +82,7 @@ public class Kata
         for (int i = matrix.GetLength(0) - 1; i >= 0; i--)
             HandleRowDeletion(i);
 
-        endRowDeletion = false;
+        endColDeletion = false;
 
         for (int j = 0; j < matrix.GetLength(1); j++)
         {
@@ -88,8 +94,6 @@ public class Kata
 
         for (int j = matrix.GetLength(1) - 1; j >= 0; j--)
             HandleColDeletion(j);
-
-        endColDeletion = false;
     }
 
     private static void HandleRowDeletion(int i)
@@ -110,7 +114,7 @@ public class Kata
         else endColDeletion = true;
     }
 
-    private static int GetNeighboursCount(int[,] arr, int k, int l)
+    private static int GetNeighboursCount(int k, int l)
     {
         int count = 0;
         for (int i = k - 1; i < k + 2; i++)
@@ -118,7 +122,7 @@ public class Kata
             for (int j = l - 1; j < l + 2; j++)
             {
                 if (i == k && j == l) continue;
-                try { if (arr[i, j] == 1) count++; }
+                try { if (original[i, j] == 1) count++; }
                 catch (Exception) { continue; }
             }
         }
@@ -180,15 +184,5 @@ public class Kata
         for (int i = 0; i < matrix.GetLength(0); i++)
             if (matrix[i, j] == 1) return false;
         return true;
-    }
-
-    private static void PrintMatrix()
-    {
-        for (int i = 0; i < matrix.GetLength(0); i++)
-        {
-            for (int j = 0; j < matrix.GetLength(1); j++)
-                System.Console.Write(matrix[i, j]);
-            System.Console.WriteLine("");
-        }
     }
 }
