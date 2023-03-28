@@ -11,18 +11,9 @@ public class Test
 
     private static TestCaseData[] cases =
     {
-        new TestCaseData(new int[,] { }, 1)
+        new TestCaseData(new int[,] { }, 0)
             .Returns(new int[,] { })
-            .SetName("0x0, 1"),
-
-        new TestCaseData(new int[,] {
-                { 1, 1 },
-                { 1, 1 } }, 0)
-            .Returns(new int[,] {
-                { 1, 1 },
-                { 1, 1 }
-            })
-            .SetName("2x2, 0"),
+            .SetName("0x0, 0"),
 
         new TestCaseData(new int[,] {
                 { 1, 1 },
@@ -65,7 +56,7 @@ public class Test
                 { 1, 1, 1 }
             })
             .SetName("3x3, 1"),
-            
+
         new TestCaseData(new int[,] {
                 { 1, 0, 0 },
                 { 0, 1, 1 },

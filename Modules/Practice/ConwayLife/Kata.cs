@@ -4,7 +4,6 @@ public class Kata
 {
     private static int[,] original;
     private static int[,] universe;
-    private static bool endDeletion;
     private static bool offset;
 
     public static int[,] GetGeneration(int[,] cells, int generation)
@@ -51,62 +50,6 @@ public class Kata
         else universe[i, j] = 0;
     }
 
-    private static void HandleAliveCell(int i, int j, int neighboursCount)
-    {
-        if (neighboursCount < 2 || neighboursCount > 3)
-            universe[i, j] = 0;
-        else if (neighboursCount == 2 || neighboursCount == 3)
-            universe[i, j] = 1;
-    }
-
-    private static void TrimUniverse()
-    {
-        for (int i = 0; i <= 1; i++)
-            TrimDimension(i);
-    }
-
-    private static void TrimDimension(int dimensionIndex)
-    {
-        for (int i = 0; i < universe.GetLength(dimensionIndex); i++)
-        {
-            ChooseDimensionToDelete(dimensionIndex, i);
-            if (!endDeletion) i--;
-        }
-
-        endDeletion = false;
-
-        for (int i = universe.GetLength(dimensionIndex) - 1; i >= 0; i--)
-            ChooseDimensionToDelete(dimensionIndex, i);
-
-        endDeletion = false;
-    }
-
-    private static void ChooseDimensionToDelete(int dimensionIndex, int i)
-    {
-        if (dimensionIndex == 0)
-            HandleRowDeletion(i);
-        else
-            HandleColDeletion(i);
-    }
-
-    private static void HandleRowDeletion(int i)
-    {
-        if (endDeletion) return;
-
-        if (UniverseRowIsEmpty(i))
-            DeleteRow(i);
-        else endDeletion = true;
-    }
-
-    private static void HandleColDeletion(int j)
-    {
-        if (endDeletion) return;
-
-        if (UniverseColIsEmpty(j))
-            DeleteCol(j);
-        else endDeletion = true;
-    }
-
     private static int GetNeighboursCount(int k, int l)
     {
         int count = 0;
@@ -121,7 +64,37 @@ public class Kata
         return count;
     }
 
-    private static void DeleteRow(int index)
+    private static void HandleAliveCell(int i, int j, int neighboursCount)
+    {
+        if (neighboursCount < 2 || neighboursCount > 3)
+            universe[i, j] = 0;
+        else if (neighboursCount == 2 || neighboursCount == 3)
+            universe[i, j] = 1;
+    }
+
+    private static void TrimUniverse()
+    {
+        TrimRows();
+        TrimCols();
+    }
+
+    private static void TrimRows()
+    {
+        while (UniverseRowIsEmpty(0))
+            DeleteUniverseRow(0);
+        while (UniverseRowIsEmpty(universe.GetLength(0) - 1))
+            DeleteUniverseRow(universe.GetLength(0) - 1);
+    }
+
+    private static void TrimCols()
+    {
+        while (UniverseColIsEmpty(0))
+            DeleteUniverseCol(0);
+        while (UniverseColIsEmpty(universe.GetLength(1) - 1))
+            DeleteUniverseCol(universe.GetLength(1) - 1);
+    }
+
+    private static void DeleteUniverseRow(int index)
     {
         original = universe;
         offset = false;
@@ -136,7 +109,7 @@ public class Kata
                 offset = true;
     }
 
-    private static void DeleteCol(int index)
+    private static void DeleteUniverseCol(int index)
     {
         original = universe;
         offset = false;
