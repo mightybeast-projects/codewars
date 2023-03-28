@@ -3,11 +3,11 @@ using NUnit.Framework;
 namespace codewars.Modules.Practice.ConwayLife;
 
 [TestFixture]
-public class Test
+public class Tests
 {
     [Test, TestCaseSource(nameof(cases))]
     public int[,] TestConwayLife(int[,] cells, int generation)
-        => Kata.GetGeneration(cells, generation);
+        => ConwayLife.GetGeneration(cells, generation);
 
     private static TestCaseData[] cases =
     {
