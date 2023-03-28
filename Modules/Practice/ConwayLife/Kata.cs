@@ -61,31 +61,32 @@ public class Kata
 
     private static void TrimUniverse()
     {
-        for (int i = 0; i < universe.GetLength(0); i++)
+        for (int i = 0; i <= 1; i++)
+            TrimDimension(i);
+    }
+
+    private static void TrimDimension(int dimensionIndex)
+    {
+        for (int i = 0; i < universe.GetLength(dimensionIndex); i++)
         {
-            HandleRowDeletion(i);
+            ChooseDimensionToDelete(dimensionIndex, i);
             if (!endDeletion) i--;
         }
 
         endDeletion = false;
 
-        for (int j = 0; j < universe.GetLength(1); j++)
-        {
-            HandleColDeletion(j);
-            if (!endDeletion) j--;
-        }
+        for (int i = universe.GetLength(dimensionIndex) - 1; i >= 0; i--)
+            ChooseDimensionToDelete(dimensionIndex, i);
 
         endDeletion = false;
+    }
 
-        for (int i = universe.GetLength(0) - 1; i >= 0; i--)
+    private static void ChooseDimensionToDelete(int dimensionIndex, int i)
+    {
+        if (dimensionIndex == 0)
             HandleRowDeletion(i);
-
-        endDeletion = false;
-
-        for (int j = universe.GetLength(1) - 1; j >= 0; j--)
-            HandleColDeletion(j);
-
-        endDeletion = false;
+        else
+            HandleColDeletion(i);
     }
 
     private static void HandleRowDeletion(int i)
