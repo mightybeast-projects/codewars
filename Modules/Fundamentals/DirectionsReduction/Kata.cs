@@ -4,54 +4,24 @@ public class Kata
 {
     enum Direction { NORTH = 1, SOUTH = -1, EAST = 2, WEST = -2 }
 
-    private static List<Direction> result;
-    private static bool needReduction;
-
     public static string[] ReduceDirections(string[] directions)
     {
-        result = new List<Direction>();
+        Stack<Direction> result = new Stack<Direction>();
 
-        for (int i = 0; i < directions.Length; i++)
-            result.Add(Enum.Parse<Direction>(directions[i]));
+        foreach (string dirStr in directions)
+            HandleDirection(result, dirStr);
 
-        foreach (Direction d in result) System.Console.Write(d + " ");
-
-        needReduction = true;
-        while(needReduction)
-        {
-            needReduction = false;
-
-            for (int i = 0; i < result.Count - 1; i++)
-            {
-                Direction dir1 = result[i];
-                Direction dir2 = result[i + 1];
-
-                if (DirectionsAreOpposite(dir1, dir2))
-                {
-                    result.RemoveAt(i + 1);
-                    result.RemoveAt(i);
-                    needReduction = true;
-                    break;
-                }
-            }
-
-            if (result.Count > 1)
-                CheckDirections(result[0], result[^1]);
-            
-            System.Console.WriteLine("-");
-                foreach (Direction d in result) System.Console.Write(d + " ");
-        }
-
-        return result.Select(x => x.ToString()).ToArray();
+        return result.Select(x => x.ToString()).Reverse().ToArray();
     }
 
-    private static void CheckDirections(Direction dir1, Direction dir2)
+    private static void HandleDirection(Stack<Direction> result, string d)
     {
-        if (!DirectionsAreOpposite(dir1, dir2)) return;
+        Direction dir = Enum.Parse<Direction>(d);
 
-        result.RemoveAt(result.IndexOf(dir2));
-        result.RemoveAt(result.IndexOf(dir1));
-        needReduction = true;
+        if (result.Count != 0 && DirectionsAreOpposite(result.Peek(), dir))
+            result.Pop();
+        else
+            result.Push(dir);
     }
 
     private static bool DirectionsAreOpposite(Direction dir1, Direction dir2)
