@@ -6,10 +6,10 @@ namespace codewars.Modules.Practice.SecretMessage;
 public class Tests
 {
     [Test, TestCaseSource(nameof(encodingCases))]
-    public string TestEncoding(string str) => Encoder.Encode(str);
+    public string TestEncoding(string str) => Kata.Encode(str);
 
     [Test, TestCaseSource(nameof(decodingCases))]
-    public string TestDecoding(string str) => Decoder.Decode(str);
+    public string TestDecoding(string str) => Kata.Decode(str);
 
     private static TestCaseData[] encodingCases =
     {
@@ -30,6 +30,8 @@ public class Tests
         new TestCaseData("bdh").Returns("aaa"),
         new TestCaseData("3dSpT,").Returns("Banana"),
         new TestCaseData("3dSpT,22K").Returns("Bananabar"),
-        new TestCaseData("atC5kif6Pg1J!").Returns("Hello, world!")
+        new TestCaseData("atC5kif6Pg1J!").Returns("Hello, world!"),
+        new TestCaseData("yFNYhdmEdViBbxc40,ROYNxw.keKCVq464dLYMh8Vya")
+            .Returns("The quick brown fox jumps over the lazy dog")
     };
 }
